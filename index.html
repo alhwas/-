@@ -13,7 +13,16 @@
 *{box-sizing:border-box;margin:0;padding:0}
 button,input,textarea,select{font-family:inherit}
 body{font-family:'Cairo','Noto Sans Arabic',system-ui,Tahoma,sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;-webkit-tap-highlight-color:transparent}
-.hd{background:linear-gradient(145deg,#0a1f3d 0%,#163a6b 45%,#0d2a52 100%);color:#fff;padding:22px 16px 52px;position:relative;overflow:hidden}
+/* ===== تحسينات التصميم الاحترافي ===== */
+.hd{background:linear-gradient(160deg,#0a1f3d 0%,#122c54 50%,#0d2a52 100%);padding:28px 16px 60px}
+.card{border-radius:20px;box-shadow:0 8px 32px rgba(10,31,61,.12)}
+.band{background:linear-gradient(135deg,#0a1f3d,#1a3a6e);padding:20px 18px}
+.path-wrap .trail{stroke:rgba(232,163,23,.5);stroke-width:1.8}
+.empty{border-radius:28px;box-shadow:0 12px 40px rgba(10,31,61,.15);padding:0;overflow:hidden}
+.auth-box{border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+.add-fab{height:56px;border-radius:32px;font-size:16px;box-shadow:0 10px 28px rgba(232,163,23,.4)}
+.pill{border-radius:12px;padding:12px 14px}
+.acts .pri{min-height:50px;font-size:15px;border-radius:14px}
 .hd::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='120' height='40' viewBox='0 0 120 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 28 C30 10,60 38,90 18 C105 8,115 22,120 16' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-dasharray='4 5'/%3E%3Cpath d='M10 32 C40 14,70 36,100 20' fill='none' stroke='rgba(232,163,23,0.12)' stroke-width='1.2' stroke-dasharray='3 4'/%3E%3C/svg%3E") repeat;opacity:.7;pointer-events:none}
 .hd .hw{position:relative;z-index:1}
 .hw{max-width:580px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -109,7 +118,7 @@ body{font-family:'Cairo','Noto Sans Arabic',system-ui,Tahoma,sans-serif;backgrou
 .bar button{height:40px;padding:0 12px;border:0;border-radius:8px;background:rgba(255,255,255,.14);color:#fff;font-size:13.5px;font-weight:600;cursor:pointer}
 .bar span{font-weight:700;font-size:15px}
 #fr{flex:1;width:100%;border:0;background:#fff}
-#toast{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--navybg);color:#fff;padding:12px 18px;border-radius:12px;font-size:13.5px;z-index:300;display:none;max-width:90%;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:toastIn .2s ease}
+#toast{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--navybg);color:#fff;padding:12px 18px;border-radius:12px;font-size:13.5px;z-index:50;display:none;max-width:90%;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:toastIn .2s ease}
 #toast .tundo{margin-inline-start:14px;background:var(--accent);color:#0a1f3d;border:0;border-radius:8px;padding:5px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
 @keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 .mon{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);margin:2px 0 8px}
@@ -148,7 +157,9 @@ body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:calc(110px 
 .auth-box{max-width:420px;width:100%;background:#fff;border-radius:20px;padding:32px 24px;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:pop .35s cubic-bezier(.2,.9,.3,1.1)}
 @keyframes pop{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .auth-logo{text-align:center;margin-bottom:8px}
-.auth-logo svg{width:56px;height:56px;fill:var(--navy)}
+.auth-logo svg{width:64px;height:64px;fill:var(--navy)}
+.auth-title{font-size:26px;letter-spacing:-.5px}
+.auth-btn{border-radius:14px;font-size:16.5px;height:54px}
 .auth-title{text-align:center;font-size:24px;font-weight:700;color:var(--navy);margin:8px 0 4px}
 .auth-sub{text-align:center;font-size:13.5px;color:var(--muted);margin-bottom:26px;line-height:1.6}
 .auth-input{width:100%;height:52px;border:1.5px solid var(--line);border-radius:12px;background:var(--field);padding:0 16px;font-size:16px;font-weight:500;color:var(--navy);margin-bottom:12px;text-align:center;letter-spacing:1px;transition:border-color .2s,box-shadow .2s}
@@ -160,7 +171,6 @@ body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:calc(110px 
 .auth-btn:disabled{opacity:.5;cursor:not-allowed}
 .auth-btn.alt{background:#f1f5f9;color:var(--navy);box-shadow:none;margin-top:8px}
 .auth-note{margin-top:16px;padding:12px;background:#f4f7fb;border-radius:10px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
-.auth-err{margin-top:12px;padding:10px 12px;background:#fef2f2;color:#b91c1c;border-radius:10px;font-size:13px;text-align:center;line-height:1.6;word-break:break-word;direction:rtl}
 .auth-info{margin-top:16px;font-size:12px;color:var(--muted);text-align:center;line-height:1.7}
 .auth-check{margin:8px 0 12px;display:flex;align-items:flex-start;gap:10px;padding:12px;background:#f8fafc;border-radius:10px;cursor:pointer;font-size:13.5px;color:var(--navy2);line-height:1.5}
 .auth-check input{margin-top:3px;width:18px;height:18px;flex:none;cursor:pointer;accent-color:var(--accent)}
@@ -278,19 +288,6 @@ function state(t){const n=Date.now(),o=openOf(t),c=closeOf(t),d=depOf(t);if(n<o)
 
 // ===== API Helper =====
 const wurl=p=>PROXY.replace(/\/?$/,'/')+p;
-async function fetchJ(path,opts={},ms=20000){
-  const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),ms);
-  try{
-    const r=await fetch(wurl(path),{...opts,signal:ctl.signal});
-    const t=await r.text();let j={};try{j=JSON.parse(t)}catch(e){}
-    if(!r.ok)throw new Error(j.error||('خطأ من الخادم ('+r.status+')'));
-    return j;
-  }catch(e){
-    if(e.name==='AbortError')throw new Error('انتهت المهلة — تحقق من الاتصال وحاول مجددًا');
-    if(e instanceof TypeError)throw new Error('تعذّر الاتصال بالخادم ('+(e.message||'network')+')');
-    throw e;
-  }finally{clearTimeout(tm)}
-}
 async function api(path,opts={}){
   const headers=opts.headers||{};
   headers['Content-Type']='application/json';
@@ -306,7 +303,6 @@ async function api(path,opts={}){
 let authStep='email'; // email | code
 let authData={email:'',code:'',timerId:0,seconds:600};
 
-function authErr(box,m){let e=box.querySelector('.auth-err');if(!e){e=h('div','auth-err');box.appendChild(e)}e.textContent=m;toast(m,5000)}
 function renderAuth(){
   const box=$('authBox');box.innerHTML='';
   const logo=h('div','auth-logo');logo.innerHTML=ICONS.plane;box.appendChild(logo);
@@ -325,23 +321,22 @@ function renderAuth(){
       i.classList.remove('bad');
       btn.disabled=true;btn.textContent='جارٍ الإرسال...';
       try{
-        await fetchJ('auth/send',{
+        await fetch(wurl('auth/send'),{
           method:'POST',
-          headers:{'Content-Type':'text/plain;charset=UTF-8'},
+          headers:{'Content-Type':'application/json'},
           body:JSON.stringify({email:em})
+        }).then(async r=>{
+          const j=await r.json();
+          if(!r.ok)throw new Error(j.error||'فشل الإرسال');
         });
         authData.email=em;
         authStep='code';
         authData.seconds=600;
         renderAuth();
         startTimer();
-        setTimeout(async()=>{
-          if(authStep!=='code'||authData.email!==em)return;
-          try{const s=await fetchJ('auth/mail-status?email='+encodeURIComponent(em),{},10000);if(s&&s.error)authErr($('authBox'),s.error)}catch(_){}
-        },7000);
       }catch(e){
         btn.disabled=false;btn.textContent='دخول / تسجيل';
-        authErr(box,e.message||'تعذّر الإرسال');
+        toast(e.message||'تعذّر الإرسال');
       }
     };
     box.appendChild(btn);
@@ -366,10 +361,14 @@ function renderAuth(){
       i.classList.remove('bad');
       btn.disabled=true;btn.textContent='جارٍ التحقق...';
       try{
-        const j=await fetchJ('auth/verify',{
+        const j=await fetch(wurl('auth/verify'),{
           method:'POST',
-          headers:{'Content-Type':'text/plain;charset=UTF-8'},
+          headers:{'Content-Type':'application/json'},
           body:JSON.stringify({email:authData.email,code:c})
+        }).then(async r=>{
+          const j=await r.json();
+          if(!r.ok)throw new Error(j.error||'فشل التحقق');
+          return j;
         });
         auth.token=j.token;auth.email=j.email;
         LS.set('auth.token',j.token);LS.set('auth.email',j.email);
@@ -385,7 +384,7 @@ function renderAuth(){
         autoResubscribePush();
       }catch(e){
         btn.disabled=false;btn.textContent='تحقق';
-        authErr(box,e.message||'رمز خاطئ');
+        toast(e.message||'رمز خاطئ');
       }
     };
     box.appendChild(btn);
@@ -949,32 +948,31 @@ function render(){
   if(!trips.length){
     const empty=h('div','empty');
     const illu=h('div','empty-illu');
-    illu.innerHTML=`<svg viewBox="0 0 915 446" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    illu.innerHTML=`<svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <defs>
-        <linearGradient id="ribGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="915" y2="0">
-          <stop offset="0" stop-color="#0e2d5c"/>
-          <stop offset=".40" stop-color="#17396b"/>
-          <stop offset=".50" stop-color="#c79c4c"/>
-          <stop offset=".58" stop-color="#f0aa2e"/>
-          <stop offset="1" stop-color="#f4b02b"/>
+        <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0a1f3d" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#e8a317" stop-opacity="0.8"/>
         </linearGradient>
       </defs>
-      <path d="M-20 245 C60 320 170 378 300 378 C430 378 520 320 620 240 C690 184 750 158 800 160 C860 162 900 210 935 275" fill="none" stroke="url(#ribGrad)" stroke-width="40" stroke-linecap="butt"/>
-      <path d="M-20 245 C60 320 170 378 300 378 C430 378 520 320 620 240 C690 184 750 158 800 160 C860 162 900 210 935 275" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.6" stroke-dasharray="6 6"/>
-      <path d="M4 135 C90 235 180 298 275 298 C345 298 400 285 434 262" fill="none" stroke="#0e2d5c" stroke-width="1.6" stroke-dasharray="6 6" stroke-linecap="round"/>
-      <path d="M539 175 C620 125 700 88 775 87 C840 86 890 105 915 125" fill="none" stroke="#e8a317" stroke-width="1.6" stroke-dasharray="6 6" stroke-linecap="round"/>
-      <g class="plane-f"><g transform="translate(474 222) rotate(55) scale(1.6)" style="filter:drop-shadow(0 3px 3px rgba(10,31,61,.25))" fill="#fff" stroke="#0e2d5c" stroke-width="1.1" stroke-linejoin="round">
-        <path d="M-30 10 L-4 -6 L-4 6 L-30 15 Z"/>
-        <path d="M30 10 L4 -6 L4 6 L30 15 Z"/>
-        <path d="M-12 28 L-3 20 L-3 27 L-12 31 Z"/>
-        <path d="M12 28 L3 20 L3 27 L12 31 Z"/>
-        <rect x="-19" y="5" width="4.5" height="9" rx="2.2"/>
-        <rect x="14.5" y="5" width="4.5" height="9" rx="2.2"/>
-        <path d="M0 -29 C3.2 -29 4.2 -20 4.2 -12 L4.2 18 C4.2 24 2 28.5 0 31 C-2 28.5 -4.2 24 -4.2 18 L-4.2 -12 C-4.2 -20 -3.2 -29 0 -29 Z"/>
-        <path d="M0 -24 C1.6 -24 2.3 -21 2.3 -18 L-2.3 -18 C-2.3 -21 -1.6 -24 0 -24 Z" fill="#0e2d5c" stroke="none"/>
-      </g></g>
+      <path d="M30 160 C80 140, 140 100, 200 110 S320 150, 370 130" fill="none" stroke="url(#pathGrad)" stroke-width="2.5" stroke-dasharray="6 5" stroke-linecap="round"/>
+      <g class="plane-f" transform="translate(185 95)">
+        <path d="M0 -12 L8 4 L0 0 L-8 4 Z" fill="#0a1f3d" stroke="#e8a317" stroke-width="1.2"/>
+        <path d="M-6 2 L0 8 L6 2" fill="none" stroke="#e8a317" stroke-width="1.5"/>
+      </g>
+      <circle cx="30" cy="160" r="4" fill="#0a1f3d"/>
+      <circle cx="370" cy="130" r="4" fill="#e8a317"/>
     </svg>`;
     empty.appendChild(illu);
+    const content=h('div');content.style.cssText='padding:24px 20px 28px;text-align:center';
+    content.appendChild(h('h3',null,'لا توجد رحلات بعد'));
+    content.querySelector('h3').style.cssText='font-size:20px;margin:12px 0 8px;color:var(--navy)';
+    content.appendChild(h('p',null,'ابدأ بإضافة رحلتك الأولى وسنتولى تتبع تسجيل الوصول تلقائيًا'));
+    content.querySelector('p').style.cssText='color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px';
+    const btn=h('button','auth-btn');btn.textContent='+ إضافة رحلة جديدة';btn.onclick=()=>$('addFab').click();
+    btn.style.cssText='max-width:280px;margin:0 auto';
+    content.appendChild(btn);
+    empty.appendChild(content);
     L.appendChild(empty);
     renderBanner();
     return;
