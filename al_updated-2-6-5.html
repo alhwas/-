@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b2545">
+<meta name="color-scheme" content="light dark">
+<title>رحلاتي — الطيران العماني</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<style>
+:root{--navy:#0a1f3d;--navy2:#122c54;--accent:#e8a317;--accent2:#f4c04a;--bg:#f4f7fb;--card:#fff;--line:#e2e8f0;--muted:#64748b;--field:#f8fafc;--err:#dc2626;--ok:#16a34a;--navybg:#0a1f3d;--hl:#fff8e6;--badbg:#fef2f2;--bgt:rgba(244,247,251,0);--wait:#ca8a04}
+*{box-sizing:border-box;margin:0;padding:0}
+button,input,textarea,select{font-family:inherit}
+body{font-family:'Cairo','Noto Sans Arabic',system-ui,Tahoma,sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;-webkit-tap-highlight-color:transparent}
+.hd{background:linear-gradient(145deg,#0a1f3d 0%,#163a6b 45%,#0d2a52 100%);color:#fff;padding:22px 16px 52px;position:relative;overflow:hidden}
+.hd::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='120' height='40' viewBox='0 0 120 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 28 C30 10,60 38,90 18 C105 8,115 22,120 16' fill='none' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' stroke-dasharray='4 5'/%3E%3Cpath d='M10 32 C40 14,70 36,100 20' fill='none' stroke='rgba(232,163,23,0.12)' stroke-width='1.2' stroke-dasharray='3 4'/%3E%3C/svg%3E") repeat;opacity:.7;pointer-events:none}
+.hd .hw{position:relative;z-index:1}
+.hw{max-width:580px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.hd h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
+.hd .sub{font-size:13px;opacity:.85;margin-top:2px}
+.chip{border:0;border-radius:20px;padding:0 16px;min-height:40px;background:rgba(255,255,255,.16);color:#fff;font-size:13px;font-weight:600;cursor:pointer;backdrop-filter:blur(8px);transition:background .2s}
+.chip:active{background:rgba(255,255,255,.28)}
+.m{max-width:580px;margin:-32px auto 0;padding:0 14px calc(120px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.add-fab{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:0;right:0;margin:0 auto;width:max-content;max-width:calc(100% - 32px);z-index:20;background:var(--accent);color:#0a1f3d;border:0;border-radius:28px;padding:0 26px;height:52px;font-size:15px;font-weight:700;box-shadow:0 8px 24px rgba(232,163,23,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,box-shadow .15s}
+.add-fab:active{transform:scale(.97);box-shadow:0 4px 16px rgba(232,163,23,.4)}
+.add-fab svg{width:20px;height:20px;fill:currentColor}
+.card{background:var(--card);border-radius:16px;box-shadow:0 4px 20px rgba(10,31,61,.08);overflow:hidden;transition:transform .2s,box-shadow .2s}
+.card:active{transform:scale(.995)}
+.empty{background:var(--card);border-radius:24px;box-shadow:0 10px 30px rgba(10,31,61,.12);position:relative;overflow:hidden;line-height:0}
+.empty-illu{width:100%;display:block}
+.empty-illu svg{width:100%;height:auto;display:block}
+.empty-illu .plane-f{animation:planeFloat 5s ease-in-out infinite}
+@keyframes planeFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(4px,-5px)}}
+@media(prefers-reduced-motion:reduce){.empty-illu .plane-f{animation:none}}
+.band{background:linear-gradient(135deg,#0a1f3d,#163a6b);color:#fff;padding:18px 16px 16px;display:flex;flex-direction:column;gap:10px}
+.route{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pt{display:flex;flex-direction:column;gap:1px;min-width:0}
+.pt b{font-size:26px;font-weight:700;letter-spacing:.5px;direction:ltr}
+.pt small{font-size:11.5px;opacity:.8;font-weight:500}
+.pt.r b{color:var(--accent2)}
+.path-wrap{position:relative;height:56px;flex:1;margin:0 4px;min-width:0}
+.path-wrap svg.arc{width:100%;height:100%;display:block;overflow:visible}
+.path-wrap .trail{fill:none;stroke:rgba(255,255,255,.4);stroke-width:1.6;stroke-dasharray:3 4;stroke-linecap:round}
+.path-wrap .dot{fill:rgba(255,255,255,.7)}
+.path-wrap .pl{fill:var(--accent2);filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.times{display:flex;justify-content:space-between;font-size:11px;opacity:.75;margin-top:2px}
+.body{padding:14px 16px 16px}
+.pill{border-radius:10px;padding:10px 12px;font-size:13.5px;font-weight:600;display:flex;flex-direction:column;gap:2px}
+.pill small{font-weight:400;font-size:12px;opacity:.9}
+.k-wait{background:#fef9c3;color:#854d0e}.k-open{background:#dcfce7;color:#166534}.k-closed{background:#fee2e2;color:#991b1b}.k-past{background:#f1f5f9;color:#475569}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin:14px 0 10px}
+.it small{display:block;font-size:11px;color:var(--muted);margin-bottom:2px}
+.it b{font-size:14.5px;font-weight:600}
+.who{font-size:12.5px;color:var(--muted);margin-bottom:10px;line-height:1.5}
+.acts{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin-top:10px;width:100%;min-width:0;box-sizing:border-box}
+.acts button,.acts a{box-sizing:border-box;flex:1 1 125px;min-width:min(125px,100%);max-width:100%;min-height:42px;height:auto;padding:9px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--navy);font-size:12.5px;font-weight:600;line-height:1.4;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-align:center;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;text-decoration:none;transition:background .15s,border-color .15s,transform .15s}
+.acts button:active,.acts a:active{transform:scale(.98);background:var(--field)}
+.acts svg{width:16px;height:16px;fill:currentColor;flex:0 0 16px}
+.acts .pri{background:var(--accent);border-color:var(--accent);color:#0a1f3d;flex:1 1 100%;min-height:46px;height:auto;font-size:14.5px;padding:11px 12px}
+.acts .ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.acts .del{color:var(--err);border-color:#fecaca}
+.foot{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;padding:0 4px}
+.foot button{background:var(--card);border:0;border-radius:20px;box-shadow:0 4px 16px rgba(10,31,61,.07);color:var(--navy);font-size:12.5px;font-weight:600;padding:12px 11px;min-width:0;display:flex;flex-direction:row;align-items:center;gap:6px;white-space:nowrap;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.foot button:active{transform:scale(.97);box-shadow:0 2px 8px rgba(10,31,61,.1)}
+.foot svg{width:16px;height:16px;fill:currentColor;flex:none}
+.dlg{position:fixed;inset:0;overflow-y:auto;background:rgba(10,31,61,.5);display:flex;align-items:center;justify-content:center;z-index:30;backdrop-filter:blur(4px);animation:fade .2s ease;padding:16px}
+.dlg[hidden]{display:none}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.sheet{margin:auto;background:var(--card);width:100%;max-width:420px;max-height:85vh;overflow:auto;border-radius:20px;padding:20px 18px 24px;animation:slide .25s cubic-bezier(.2,.8,.2,1);box-shadow:0 12px 40px rgba(10,31,61,.2)}
+@keyframes slide{from{transform:scale(.94) translateY(12px);opacity:.7}to{transform:scale(1) translateY(0);opacity:1}}
+.sheet h2{font-size:18px;margin-bottom:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.sheet.ctr h2{justify-content:center;text-align:center}
+.sheet.ctr p{text-align:center}
+.sheet.ctr .acts{justify-content:center}
+.sheet h2 svg{width:20px;height:20px;fill:var(--navy2)}
+.sheet p{font-size:14px;line-height:1.8;color:#334155;margin-bottom:6px}
+.sheet .orig{margin-top:10px;font-size:12px;background:var(--field);border-radius:8px;padding:10px;color:var(--muted);direction:ltr;text-align:left;overflow-wrap:anywhere}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}.f.full{grid-column:1/-1}
+.f label{font-size:12px;font-weight:600;color:var(--navy2);display:flex;align-items:center;gap:5px}
+.f label svg{width:14px;height:14px;fill:var(--navy2)}
+.f input,.f select{height:46px;border:1.5px solid var(--line);border-radius:11px;background:var(--field);padding:0 12px;font-size:15px;font-weight:500;color:var(--navy);width:100%;transition:border-color .2s,box-shadow .2s}
+.f input:focus,.f select:focus{border-color:var(--navy2);box-shadow:0 0 0 4px rgba(18,44,84,.1);outline:none}
+.f input.ltr{direction:ltr;text-align:right}
+.f input.bad,.f select.bad{border-color:var(--err);background:var(--badbg)}
+.apt-btn{width:100%;height:46px;border:1.5px solid var(--line);border-radius:11px;background:var(--field);padding:0 12px;font-size:15px;font-weight:500;color:var(--navy);display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:right}
+.apt-btn span{direction:ltr;font-weight:600}
+.apt-drop{display:none;margin-top:6px}
+.apt-drop.on{display:block}
+.apt-list{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow:auto}
+.apt{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--field);border:1.5px solid transparent;cursor:pointer;transition:all .15s}
+.apt:active{transform:scale(.98)}
+.apt.on{background:var(--hl);border-color:var(--accent)}
+.apt .code{font-weight:700;font-size:15px;letter-spacing:.5px;min-width:48px;direction:ltr;text-align:left}
+.apt .name{font-size:13.5px;color:var(--navy);flex:1}
+.apt-search{width:100%;height:44px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);padding:0 12px;font-size:14.5px;margin-bottom:4px}
+#ov{position:fixed;inset:0;background:var(--navybg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#fff;z-index:40;padding:24px;text-align:center}
+#ov.on{display:flex}
+.sp{width:48px;height:48px;border:4px solid rgba(255,255,255,.2);border-top-color:var(--accent);border-radius:50%;animation:r .8s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+#ovMsg{font-size:16px;font-weight:600}#ovSub{font-size:13px;opacity:.75}
+.ob{display:none;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+.ob button{height:44px;padding:0 20px;border-radius:12px;border:0;font-size:14.5px;font-weight:700;cursor:pointer}
+#fb{background:var(--accent);color:#0a1f3d}#cb{background:rgba(255,255,255,.15);color:#fff}
+#viewer{position:fixed;inset:0;background:#fff;display:none;flex-direction:column;z-index:35}
+#viewer.on{display:flex}
+.bar{height:52px;background:var(--navybg);color:#fff;display:flex;align-items:center;gap:12px;padding:0 12px;flex:none}
+.bar button{height:40px;padding:0 12px;border:0;border-radius:8px;background:rgba(255,255,255,.14);color:#fff;font-size:13.5px;font-weight:600;cursor:pointer}
+.bar span{font-weight:700;font-size:15px}
+#fr{flex:1;width:100%;border:0;background:#fff}
+#toast{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--navybg);color:#fff;padding:12px 18px;border-radius:12px;font-size:13.5px;z-index:300;display:none;max-width:90%;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:toastIn .2s ease}
+#toast .tundo{margin-inline-start:14px;background:var(--accent);color:#0a1f3d;border:0;border-radius:8px;padding:5px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.mon{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);margin:2px 0 8px}
+.mon i{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.donebadge{display:inline-block;margin-inline-start:8px;background:#dcfce7;color:#166534;border-radius:8px;padding:1px 8px;font-size:11.5px;font-weight:600}
+.passimg{width:100%;border-radius:12px;border:1px solid var(--line);margin-bottom:8px}
+#banner{max-width:580px;margin:12px auto 0;padding:0 14px;display:flex;flex-direction:column;gap:8px}
+#banner:empty{margin:0;padding:0}
+#banner:not(:empty)+.m{margin-top:12px}
+.bnr.info{background:#e0f2fe;border-color:#7dd3fc;color:#075985}.bnr.info svg{fill:#0284c7}.bnr.info button{background:#0284c7;color:#fff}
+.bnr.ok{background:#dcfce7;border-color:#86efac;color:#166534}.bnr.ok svg{fill:#16a34a}.bnr.ok button{background:#16a34a;color:#fff}
+.bnr.gray{background:#f1f5f9;border-color:#cbd5e1;color:#475569}.bnr.gray svg{fill:#64748b}.bnr.gray button{background:var(--navybg);color:#fff}
+.bnr span{flex:1;min-width:0;line-height:1.5}
+#mini{position:fixed;top:0;left:0;right:0;z-index:24;background:linear-gradient(145deg,#0a1f3d,#163a6b);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));transform:translateY(-115%);transition:transform .22s ease;box-shadow:0 4px 16px rgba(10,31,61,.28)}
+#mini.on{transform:none}
+#mini b{font-size:17px;font-weight:700}#mini span{font-size:12.5px;opacity:.85;flex:1;min-width:0;direction:ltr;text-align:right}
+body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:calc(110px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 38%,var(--bgt));pointer-events:none;z-index:19}
+.bnr{background:#fef9c3;border:1px solid #fde047;border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;font-size:13.5px;color:#713f12;font-weight:600}
+.bnr svg{width:22px;height:22px;fill:#ca8a04;flex:none}
+.bnr button{margin-inline-start:auto;background:var(--accent);color:#0a1f3d;border:0;border-radius:10px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;flex:none}
+.bnr.urgent{background:#fee2e2;border-color:#fca5a5;color:#991b1b}
+.bnr.urgent svg{fill:#dc2626}
+.bnr.urgent button{background:#dc2626;color:#fff}
+#ticketViewer{position:fixed;inset:0;background:#eef2f7;display:none;flex-direction:column;z-index:60}
+#ticketViewer.on{display:flex}.ticket-toolbar{display:flex;align-items:center;gap:8px;padding:10px;background:var(--navybg);color:#fff;flex:none}
+.ticket-toolbar strong{flex:1;font-size:15px}.ticket-toolbar button,.ticket-actions button{border:0;border-radius:10px;min-height:42px;padding:0 13px;font:600 13px 'Cairo',sans-serif;cursor:pointer}
+.ticket-toolbar button{background:rgba(255,255,255,.15);color:#fff}#ticketFrame{border:0;width:100%;flex:1;min-height:0;background:#fff}
+.ticket-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:10px;background:var(--card);box-shadow:0 -4px 18px #0a1f3d12;flex:none}
+.ticket-actions button{background:var(--field);color:var(--navy);border:1px solid var(--line)}.ticket-actions .pdf{background:var(--accent);border-color:var(--accent)}
+@media(max-width:360px){.ticket-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.sp{animation-duration:2.5s}.sheet,.dlg,#toast{animation:none}.bnr{transition:none}}
+
+/* ===== شاشة تسجيل الدخول ===== */
+#auth{position:fixed;inset:0;background:linear-gradient(135deg,#0a1f3d,#163a6b);display:flex;align-items:center;justify-content:center;padding:24px;z-index:100;overflow:auto}
+#auth.off{display:none}
+.auth-box{max-width:420px;width:100%;background:#fff;border-radius:20px;padding:32px 24px;box-shadow:0 20px 60px rgba(0,0,0,.35);animation:pop .35s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.auth-logo{text-align:center;margin-bottom:8px}
+.auth-logo svg{width:56px;height:56px;fill:var(--navy)}
+.auth-title{text-align:center;font-size:24px;font-weight:700;color:var(--navy);margin:8px 0 4px}
+.auth-sub{text-align:center;font-size:13.5px;color:var(--muted);margin-bottom:26px;line-height:1.6}
+.auth-input{width:100%;height:52px;border:1.5px solid var(--line);border-radius:12px;background:var(--field);padding:0 16px;font-size:16px;font-weight:500;color:var(--navy);margin-bottom:12px;text-align:center;letter-spacing:1px;transition:border-color .2s,box-shadow .2s}
+.auth-input:focus{border-color:var(--navy2);box-shadow:0 0 0 4px rgba(18,44,84,.1);outline:none}
+.auth-input.bad{border-color:var(--err);background:#fef2f2}
+.auth-input.code{font-size:30px;font-weight:800;letter-spacing:14px;font-family:monospace;direction:ltr;text-align:center;padding-right:0}
+.auth-btn{width:100%;height:52px;border:0;border-radius:12px;background:var(--accent);color:#0a1f3d;font-size:16px;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 6px 16px rgba(232,163,23,.35)}
+.auth-btn:active{transform:scale(.98);box-shadow:0 3px 10px rgba(232,163,23,.4)}
+.auth-btn:disabled{opacity:.5;cursor:not-allowed}
+.auth-btn.alt{background:#f1f5f9;color:var(--navy);box-shadow:none;margin-top:8px}
+.auth-note{margin-top:16px;padding:12px;background:#f4f7fb;border-radius:10px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7}
+.auth-err{margin-top:12px;padding:10px 12px;background:#fef2f2;color:#b91c1c;border-radius:10px;font-size:13px;text-align:center;line-height:1.6;word-break:break-word;direction:rtl}
+.auth-info{margin-top:16px;font-size:12px;color:var(--muted);text-align:center;line-height:1.7}
+.auth-check{margin:8px 0 12px;display:flex;align-items:flex-start;gap:10px;padding:12px;background:#f8fafc;border-radius:10px;cursor:pointer;font-size:13.5px;color:var(--navy2);line-height:1.5}
+.auth-check input{margin-top:3px;width:18px;height:18px;flex:none;cursor:pointer;accent-color:var(--accent)}
+.timer{margin-top:8px;font-size:12.5px;color:var(--muted);text-align:center}
+.timer b{color:var(--accent)}
+@media(prefers-reduced-motion:reduce){.auth-box{animation:none}}
+
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.sheet:focus{outline:none}
+
+/* ===== (9) الوضع الداكن — يتبع إعدادات الهاتف ===== */
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0b1220;--card:#131d31;--line:#25334f;--muted:#97a6bd;--field:#0e1729;--navy:#e6edf7;--navy2:#c5d4ec;--navybg:#1e2f4f;--hl:rgba(232,163,23,.16);--badbg:#3a1c1f;--bgt:rgba(11,18,32,0)}
+  .sheet p{color:#cbd5e1}
+  .card,.empty,.sheet,.foot button{box-shadow:0 4px 20px rgba(0,0,0,.35)}
+  .auth-box{--navy:#0a1f3d;--navy2:#122c54;--card:#fff;--line:#e2e8f0;--muted:#64748b;--field:#f8fafc}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== شاشة تسجيل الدخول ===== -->
+<div id="auth" class="off">
+  <div class="auth-box" id="authBox"></div>
+</div>
+
+<header class="hd"><div class="hw">
+  <div><h1>رحلاتي</h1><div class="sub">مطار الانطلاق: <b id="baseTxt"></b></div></div>
+  <button class="chip" id="setBase">تغيير المطار</button>
+</div></header>
+<div id="mini"><b>رحلاتي</b><span id="miniBase"></span><button class="chip" id="miniChg" type="button">تغيير المطار</button></div>
+
+<div id="banner" aria-live="polite"></div>
+
+<main class="m">
+  <section id="list"></section>
+  <div class="foot">
+    <button id="bExp"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>نسخة احتياطية</button>
+    <button id="bImp"><svg viewBox="0 0 24 24"><path d="M19 15v4H5v-4H3v6h18v-6h-2zm-6-2V5h-2v8H7l5 5 5-5h-4z"/></svg>استعادة</button>
+    <button id="bProfile"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>بياناتي</button>
+  </div>
+</main>
+
+<button class="add-fab" id="addFab"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>إضافة رحلة</button>
+<div class="dlg" id="dlg" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="sheet" id="sheet"></div></div>
+<div id="ov"><div class="sp"></div><div id="ovMsg"></div><div id="ovSub"></div>
+  <div class="ob" id="ob"><button id="fb">فتح الصفحة مباشرة</button><button id="cb">إلغاء</button></div></div>
+<div id="viewer"><div class="bar"><button id="bk">رجوع</button><span>تسجيل الوصول</span></div><iframe id="fr" referrerpolicy="no-referrer"></iframe></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="ticketViewer"><div class="ticket-toolbar"><button id="ticketBack" type="button">رجوع ✕</button><strong>بطاقة الرحلة</strong></div>
+<iframe id="ticketFrame" title="معاينة تفاصيل الرحلة" sandbox="allow-same-origin allow-modals"></iframe>
+<div class="ticket-actions"><button id="ticketPrint" type="button">🖨️ طباعة</button><button id="ticketImage" type="button">🖼️ تحميل صورة</button><button id="ticketPdf" class="pdf" type="button">📄 تحميل PDF</button></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const PROXY='https://flightbooking.alhwas-ai-6d5.workers.dev/';
+const AIRPORTS={MCT:'مسقط',SLL:'صلالة',FAU:'فهود',OMM:'مرمول',RNM:'قرن العلم',DQM:'الدقم',KHS:'خصب',OHS:'صحار',MSH:'مصيرة',SUH:'صور',AOM:'أدم',LKW:'الخوير',UKH:'مخيزنة',RMB:'البريدي',NMR:'نمر',JNJ:'الجعلاني',BYB:'دبا',TTH:'ثمريت'};
+const NAMES=AIRPORTS;
+const ICONS={
+  edit:'<svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
+  del:'<svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>',
+  copy:'<svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>',
+  pdf:'<svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>',
+  cal:'<svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>',
+  plane:'<svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>',
+  user:'<svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>',
+  phone:'<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>',
+  clock:'<svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>',
+  mail:'<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+  bell:'<svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4a1.5 1.5 0 0 0-3 0v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>',
+  check:'<svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',
+  ticket:'<svg viewBox="0 0 24 24"><path d="M22 10V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 0 4v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1 0-4z"/></svg>',
+  logout:'<svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>'
+};
+const LS={
+  get(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}
+};
+
+// ===== الحالة =====
+let trips=LS.get('trips',[]),base=LS.get('base','FAU');
+let profile=LS.get('profile',{name:'',surname:'',email:'',phones:[],openH:12,closeH:2,emailNotify:true});
+let del=LS.get('del',{}),mon={},synced=false;
+let auth={token:LS.get('auth.token',''),email:LS.get('auth.email','')};
+
+const pad=n=>String(n).padStart(2,'0');
+function h(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+const buzz=ms=>{try{navigator.vibrate&&navigator.vibrate(ms)}catch(e){}};
+let tt;function toast(m,ms){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(tt);tt=setTimeout(()=>t.style.display='none',ms||3000)}
+// حذف مع إمكانية التراجع (6 ثوانٍ) — الحذف الفعلي (البطاقة المحفوظة + المزامنة) يتم بعد انتهاء المهلة
+let pendDel=null;
+function commitDel(){if(!pendDel)return;const p=pendDel;pendDel=null;clearTimeout(p.tm);del[p.t.id]=Date.now();DB.del(p.t.id).catch(()=>{});save()}
+function softDelete(t){
+  commitDel();
+  trips=trips.filter(x=>x.id!==t.id);render();
+  const el=$('toast');el.textContent='';el.append(h('span',null,'تم حذف الرحلة'));
+  const b=h('button','tundo','تراجع');b.type='button';
+  b.onclick=()=>{if(!pendDel||pendDel.t!==t)return;clearTimeout(pendDel.tm);pendDel=null;trips.push(t);render();toast('تمت استعادة الرحلة')};
+  el.append(b);el.style.display='block';clearTimeout(tt);tt=setTimeout(()=>el.style.display='none',6000);
+  pendDel={t,tm:setTimeout(commitDel,6000)};buzz(30);
+}
+window.addEventListener('pagehide',commitDel);
+window.addEventListener('offline',()=>{toast('لا يوجد اتصال — بياناتك محفوظة على جهازك');renderBanner()});
+window.addEventListener('online',()=>{toast('عاد الاتصال');renderBanner();if(auth.token){if(syncFail)pushNow();cloudPull()}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)commitDel()});
+function save(){LS.set('trips',trips);LS.set('base',base);LS.set('profile',profile);LS.set('del',del);cloudPush()}
+const depOf=t=>new Date(t.date+'T'+t.time+':00');
+const openOf=t=>new Date(+depOf(t)-t.openH*36e5);
+const closeOf=t=>new Date(+depOf(t)-t.closeH*36e5);
+function dur(ms){const m=Math.max(0,Math.floor(ms/6e4)),d=Math.floor(m/1440),hh=Math.floor(m%1440/60),mm=m%60,p=[];if(d)p.push(d+' يوم');if(hh)p.push(hh+' ساعة');if(mm||!p.length)p.push(mm+' دقيقة');return p.join(' و ')}
+const fdate=d=>d.toLocaleDateString('ar-OM-u-nu-latn',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const ftime=d=>pad(d.getHours())+':'+pad(d.getMinutes());
+function state(t){const n=Date.now(),o=openOf(t),c=closeOf(t),d=depOf(t);if(n<o)return{k:'wait',txt:'يفتح التسجيل بعد '+dur(o-n),sub:'الفتح: '+fdate(o)+' الساعة '+ftime(o)};if(n<c)return{k:'open',txt:'التسجيل مفتوح الآن',sub:'يغلق بعد '+dur(c-n)+' (الساعة '+ftime(c)+')'};if(n<d)return{k:'closed',txt:'أُغلق التسجيل',sub:'أُغلق قبل الإقلاع بـ '+t.closeH+' ساعة'};return{k:'past',txt:'انتهت الرحلة',sub:fdate(d)}}
+
+// ===== API Helper =====
+const wurl=p=>PROXY.replace(/\/?$/,'/')+p;
+async function fetchJ(path,opts={},ms=20000){
+  const ctl=new AbortController(),tm=setTimeout(()=>ctl.abort(),ms);
+  try{
+    const r=await fetch(wurl(path),{...opts,signal:ctl.signal});
+    const t=await r.text();let j={};try{j=JSON.parse(t)}catch(e){}
+    if(!r.ok)throw new Error(j.error||('خطأ من الخادم ('+r.status+')'));
+    return j;
+  }catch(e){
+    if(e.name==='AbortError')throw new Error('انتهت المهلة — تحقق من الاتصال وحاول مجددًا');
+    if(e instanceof TypeError)throw new Error('تعذّر الاتصال بالخادم ('+(e.message||'network')+')');
+    throw e;
+  }finally{clearTimeout(tm)}
+}
+async function api(path,opts={}){
+  const headers=opts.headers||{};
+  headers['Content-Type']='application/json';
+  if(auth.token)headers['Authorization']='Bearer '+auth.token;
+  const r=await fetch(wurl(path),{...opts,headers});
+  const j=await r.json().catch(()=>({}));
+  if(r.status===401){logoutLocal();throw new Error('انتهت الجلسة');}
+  if(!r.ok)throw new Error(j.error||'خطأ في الاتصال');
+  return j;
+}
+
+// ===== شاشة الدخول =====
+let authStep='email'; // email | code
+let authData={email:'',code:'',timerId:0,seconds:600};
+
+function authErr(box,m){let e=box.querySelector('.auth-err');if(!e){e=h('div','auth-err');box.appendChild(e)}e.textContent=m;toast(m,5000)}
+function renderAuth(){
+  const box=$('authBox');box.innerHTML='';
+  const logo=h('div','auth-logo');logo.innerHTML=ICONS.plane;box.appendChild(logo);
+  box.appendChild(h('div','auth-title','رحلاتي'));
+  box.appendChild(h('div','auth-sub','رحلاتك في مكان واحد آمن'));
+
+  if(authStep==='email'){
+    const i=h('input','auth-input');i.type='email';i.placeholder='you@example.com';i.autocomplete='email';i.inputMode='email';i.dir='ltr';
+    i.value=authData.email||'';
+    box.appendChild(i);
+
+    const btn=h('button','auth-btn','دخول / تسجيل');
+    btn.onclick=async()=>{
+      const em=i.value.trim().toLowerCase();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){i.classList.add('bad');toast('أدخل إيميلًا صحيحًا');return}
+      i.classList.remove('bad');
+      btn.disabled=true;btn.textContent='جارٍ الإرسال...';
+      try{
+        await fetchJ('auth/send',{
+          method:'POST',
+          headers:{'Content-Type':'text/plain;charset=UTF-8'},
+          body:JSON.stringify({email:em})
+        });
+        authData.email=em;
+        authStep='code';
+        authData.seconds=600;
+        renderAuth();
+        startTimer();
+        setTimeout(async()=>{
+          if(authStep!=='code'||authData.email!==em)return;
+          try{const s=await fetchJ('auth/mail-status?email='+encodeURIComponent(em),{},10000);if(s&&s.error)authErr($('authBox'),s.error)}catch(_){}
+        },7000);
+      }catch(e){
+        btn.disabled=false;btn.textContent='دخول / تسجيل';
+        authErr(box,e.message||'تعذّر الإرسال');
+      }
+    };
+    box.appendChild(btn);
+
+    box.appendChild(h('div','auth-info','سنرسل لك رمز تحقق مكوّن من 6 أرقام. لا حاجة لكلمة مرور.'));
+  }else{
+    box.appendChild(h('div','auth-sub','أُرسل رمز التحقق إلى:'));
+    const emShow=h('div');emShow.style.cssText='text-align:center;font-weight:700;color:var(--navy);direction:ltr;margin-bottom:16px;word-break:break-all';
+    emShow.textContent=authData.email;
+    box.appendChild(emShow);
+
+    const i=h('input','auth-input code');
+    i.type='tel';i.maxLength=6;i.inputMode='numeric';i.placeholder='000000';i.autocomplete='one-time-code';
+    i.value=authData.code||'';
+    i.oninput=()=>{i.value=i.value.replace(/\D/g,'').slice(0,6);};
+    box.appendChild(i);
+
+    const btn=h('button','auth-btn','تحقق');
+    btn.onclick=async()=>{
+      const c=i.value.trim();
+      if(!/^\d{6}$/.test(c)){i.classList.add('bad');toast('أدخل 6 أرقام');return}
+      i.classList.remove('bad');
+      btn.disabled=true;btn.textContent='جارٍ التحقق...';
+      try{
+        const j=await fetchJ('auth/verify',{
+          method:'POST',
+          headers:{'Content-Type':'text/plain;charset=UTF-8'},
+          body:JSON.stringify({email:authData.email,code:c})
+        });
+        auth.token=j.token;auth.email=j.email;
+        LS.set('auth.token',j.token);LS.set('auth.email',j.email);
+        if(j.trips&&j.trips.length){trips=j.trips;LS.set('trips',trips);}
+        profile.email=j.email;
+        LS.set('profile',profile);
+        synced=true;
+        stopTimer();
+        $('auth').classList.add('off');
+        render();
+        toast('✅ مرحبًا بك');
+        // ربط push الموجود إن وجد
+        autoResubscribePush();
+      }catch(e){
+        btn.disabled=false;btn.textContent='تحقق';
+        authErr(box,e.message||'رمز خاطئ');
+      }
+    };
+    box.appendChild(btn);
+
+    const alt=h('button','auth-btn alt','تغيير الإيميل');
+    alt.onclick=()=>{stopTimer();authStep='email';authData.code='';renderAuth()};
+    box.appendChild(alt);
+
+    const timer=h('div','timer');
+    timer.id='authTimer';
+    box.appendChild(timer);
+    updateTimer();
+  }
+}
+function startTimer(){
+  stopTimer();
+  authData.seconds=600;
+  authData.timerId=setInterval(()=>{
+    authData.seconds--;
+    if(authData.seconds<=0){stopTimer();toast('انتهت صلاحية الرمز');authStep='email';renderAuth();return}
+    updateTimer();
+  },1000);
+}
+function stopTimer(){if(authData.timerId){clearInterval(authData.timerId);authData.timerId=0}}
+function updateTimer(){
+  const t=$('authTimer');if(!t)return;
+  const m=Math.floor(authData.seconds/60),s=authData.seconds%60;
+  t.innerHTML='صالح لمدة <b>'+m+':'+pad(s)+'</b>';
+}
+
+function logoutLocal(){
+  auth={token:'',email:''};
+  LS.del('auth.token');LS.del('auth.email');
+  $('auth').classList.remove('off');
+  authStep='email';authData.email='';authData.code='';
+  stopTimer();renderAuth();
+}
+function doLogout(){
+  sheet('تسجيل الخروج',[para('سيتم حذف جلستك من هذا الجهاز. رحلاتك محفوظة في السحابة.')],[
+    {label:'إلغاء'},
+    {label:'خروج',cls:'pri',fn:async()=>{
+      try{await fetch(wurl('logout'),{method:'POST',headers:{'Authorization':'Bearer '+auth.token}})}catch(e){}
+      logoutLocal();
+    }}
+  ]);
+}
+function checkAuth(){
+  if(!auth.token||!auth.email){renderAuth();return false}
+  return true;
+}
+
+// ===== المزامنة =====
+let pushT,syncFail=false;
+function cloudPush(){if(!auth.token)return;clearTimeout(pushT);pushT=setTimeout(pushNow,1200)}
+async function pushNow(){
+  if(!auth.token)return;
+  try{
+    await api('sync',{method:'POST',body:JSON.stringify({
+      data:{trips,del,base,profile,emailNotify:profile.emailNotify!==false,cloud:{tz:'+04:00'},ts:Date.now()}
+    })});syncFail=false;
+  }catch(e){syncFail=true}
+}
+async function cloudPull(manual){
+  if(!auth.token)return;
+  try{
+    const j=await api('me');
+    if(j.trips&&j.trips.length){
+      // merge: نأخذ الأحدث من كل جهاز
+      const map={};trips.forEach(t=>map[t.id]=t);
+      j.trips.forEach(r=>{const l=map[r.id];if(!l||(r.upd||0)>(l.upd||0))map[r.id]=r});
+      trips=Object.values(map);LS.set('trips',trips);
+    }
+    if(j.profile&&j.profile.email)profile.email=j.profile.email;
+    synced=true;
+    try{const s=await api('status');mon=s.status||{}}catch(e){mon={}}
+    render();
+    if(manual)toast('تمت المزامنة');
+  }catch(e){if(manual)toast('تعذّرت المزامنة')}
+}
+function monLine(t){
+  if(t.done||!auth.token||state(t).k==='past')return null;
+  const s=mon[t.id],d=h('div','mon'),i=h('i');d.append(i);
+  let txt='المراقبة مفعّلة';
+  if(profile.email)txt+=' — يصلك تنبيه على الهاتف والإيميل';
+  if(s&&s.sent&&s.sent.avail){txt='أُرسل إشعار بتوفر التسجيل — افتح الرابط وأكمل';i.style.background='var(--ok)'}
+  else if(s&&s.last){txt='آخر فحص قبل '+Math.max(0,Math.round((Date.now()-s.last)/6e4))+' دقيقة'+(s.res==='no'?' — لا يوجد حجز بعد':'')}
+  d.append(h('span',null,txt));return d;
+}
+
+// ===== بطاقة الصعود =====
+const DB={
+  open(){return new Promise((res,rej)=>{const r=indexedDB.open('trips-db',1);r.onupgradeneeded=()=>r.result.createObjectStore('passes');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})},
+  async tx(mode,fn){const db=await this.open();return new Promise((res,rej)=>{const q=fn(db.transaction('passes',mode).objectStore('passes'));q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})},
+  get(id){return this.tx('readonly',s=>s.get(id))},put(id,v){return this.tx('readwrite',s=>s.put(v,id))},del(id){return this.tx('readwrite',s=>s.delete(id))}
+};
+async function passSheet(t){
+  let rec=null;try{rec=await DB.get(t.id)}catch(e){}
+  const pick=()=>{const i=document.createElement('input');i.type='file';i.accept='image/*,application/pdf';
+    i.onchange=async()=>{const f=i.files[0];if(!f)return;if(f.size>8e6)return toast('الملف كبير (الحد 8 ميجابايت)');
+      try{await DB.put(t.id,{name:f.name,type:f.type,blob:f});t.pass=true;t.done=true;t.upd=Date.now();save();render();toast('حُفظت بطاقة الصعود');buzz([40,60,40]);passSheet(t)}catch(e){toast('تعذّر الحفظ')}};
+    i.click()};
+  if(!rec){sheet('بطاقة الصعود',[para('بعد إتمام التسجيل، احفظ بطاقة الصعود (صورة أو PDF) هنا لتظهر دون إنترنت.'),para('عند الحفظ تُعتبر الرحلة مسجّلة وتتوقف إشعاراتها.')],[{label:'إغلاق'},{label:'إضافة الملف',cls:'pri',fn:pick}]);return}
+  const url=URL.createObjectURL(rec.blob),nodes=[];
+  if((rec.type||'').startsWith('image/')){const im=document.createElement('img');im.src=url;im.className='passimg';nodes.push(im)}
+  else nodes.push(para('ملف PDF: '+rec.name));
+  sheet('بطاقة الصعود',nodes,[{label:'إغلاق'},{label:'حذف',fn:async()=>{try{await DB.del(t.id)}catch(e){}t.pass=false;t.upd=Date.now();save();render()}},{label:'استبدال',fn:pick},{label:'فتح',cls:'pri',keep:true,fn:()=>window.open(url,'_blank')}]);
+}
+
+// ===== Sheet =====
+function sheet(title,nodes,actions){
+  const s=$('sheet');s.innerHTML='';s.className='sheet';
+  const ttl=h('h2',null,title);ttl.id='sheetTitle';s.appendChild(ttl);s.tabIndex=-1;
+  nodes.forEach(n=>s.appendChild(n));
+  const ab=h('div','acts');
+  actions.forEach(a=>{const b=h('button',a.cls||'sec',a.label);b.type='button';b.onclick=()=>{if(!a.keep)closeSheet();if(a.fn)a.fn()};ab.appendChild(b)});
+  s.appendChild(ab);$('dlg').hidden=false;try{s.focus({preventScroll:true})}catch(e){}
+}
+function closeSheet(){$('dlg').hidden=true}
+$('dlg').addEventListener('click',e=>{if(e.target===$('dlg'))closeSheet()});
+const para=t=>h('p',null,t);
+
+// ===== Push =====
+const b64u=b=>Uint8Array.from([...atob((b+'='.repeat((4-b.length%4)%4)).replace(/-/g,'+').replace(/_/g,'/'))].map(c=>c.charCodeAt(0)));
+
+async function hasPushSubscription(){
+  try{const r=await navigator.serviceWorker.getRegistration();const s=await r?.pushManager?.getSubscription();return !!s}catch(e){return false}
+}
+
+async function enablePush(quiet){
+  const say=m=>{if(!quiet)toast(m)};
+  if(!('serviceWorker'in navigator)||!('PushManager'in window)){say('الجهاز لا يدعم الإشعارات');return false}
+  if(!window.isSecureContext){say('افتح التطبيق من https');return false}
+  if(!auth.token){say('سجّل دخول أولًا');return false}
+  const perm=await Notification.requestPermission();
+  if(perm!=='granted'){say('لم توافق على الإشعارات');return false}
+  try{
+    const r=await navigator.serviceWorker.register('/sw.js');
+    await navigator.serviceWorker.ready;
+    const{key}=await fetch(wurl('vapid-public')).then(r=>r.json());
+    if(!key){say('الخادم لا يدعم الإشعارات');return false}
+    const s=await r.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(key)});
+    await api('subscribe',{method:'POST',body:JSON.stringify({subscription:s})});
+    say('✅ تم تفعيل الإشعارات');
+    renderBanner();
+    return true;
+  }catch(e){say('تعذّر التفعيل: '+(e.message||e));return false}
+}
+async function disablePush(){
+  try{
+    const r=await navigator.serviceWorker.getRegistration(),s=await r?.pushManager?.getSubscription();
+    if(!s)return;
+    await api('unsubscribe',{method:'POST',body:JSON.stringify({endpoint:s.endpoint})});
+    await s.unsubscribe();toast('تم إيقاف الإشعارات');
+  }catch(e){}
+}
+async function autoResubscribePush(){
+  // بعد تسجيل الدخول — إن كان لديه اشتراك، أعِد ربطه بالحساب
+  try{
+    const r=await navigator.serviceWorker.getRegistration();
+    const s=await r?.pushManager?.getSubscription();
+    if(s){
+      await api('subscribe',{method:'POST',body:JSON.stringify({subscription:s})});
+      renderBanner();
+    }
+  }catch(e){}
+}
+async function testPush(){
+  try{await api('test-push',{method:'POST'});toast('✅ أُرسل إشعار تجريبي')}
+  catch(e){toast(e.message||'فشل')}
+}
+async function testEmail(){
+  try{await api('test-email',{method:'POST'});toast('✅ أُرسل إيميل تجريبي')}
+  catch(e){toast(e.message||'فشل')}
+}
+async function sendTicketByEmail(t){
+  if(!auth.token){toast('سجّل دخول أولًا');return}
+  toast('جارٍ الإرسال...');
+  try{
+    await api('send-ticket',{method:'POST',body:JSON.stringify({trip:t})});
+    toast('✅ أُرسلت التذكرة إلى '+auth.email);
+  }catch(e){toast(e.message||'فشل')}
+}
+
+// ===== Airport picker =====
+function airportPicker(current,multi){
+  let sel=multi?((current||'').match(/[A-Z]{3}/g)||[]):(current||'');
+  const has=c=>multi?sel.includes(c):sel===c;
+  const wrap=h('div'),btn=h('div','apt-btn');
+  const updateBtn=()=>{const codes=multi?sel:(sel?[sel]:[]);btn.innerHTML=`<span>${codes.join(' - ')||'اختر'}</span><span style="opacity:.6;font-size:12px">${codes.map(c=>NAMES[c]||'').filter(Boolean).join(' · ')}</span>`};
+  updateBtn();
+  const drop=h('div','apt-drop');
+  const search=document.createElement('input');search.className='apt-search';search.placeholder='ابحث عن مطار أو رمز...';search.type='search';
+  const list=h('div','apt-list'),items=[];
+  const paint=()=>items.forEach(x=>x.classList.toggle('on',has(x.dataset.code)));
+  Object.entries(AIRPORTS).sort((a,b)=>a[1].localeCompare(b[1],'ar')).forEach(([code,ar])=>{
+    const item=h('div','apt'+(has(code)?' on':''));
+    item.innerHTML=`<span class="code">${code}</span><span class="name">${ar}</span>`;item.dataset.code=code;
+    item.onclick=()=>{if(multi){sel=has(code)?sel.filter(x=>x!==code):sel.concat(code);paint();updateBtn()}else{sel=code;paint();updateBtn();drop.classList.remove('on')}};
+    items.push(item);list.appendChild(item);
+  });
+  search.oninput=()=>{const q=search.value.trim().toLowerCase();items.forEach(it=>{const code=it.dataset.code.toLowerCase(),name=it.querySelector('.name').textContent.toLowerCase();it.style.display=(!q||code.includes(q)||name.includes(q))?'flex':'none'})};
+  if(multi){const hn=h('div',null,'يمكن اختيار أكثر من مطار بترتيب الرحلة');hn.style.cssText='font-size:12px;color:var(--muted);padding:2px 4px 6px';drop.appendChild(hn)}
+  drop.append(search,list);
+  btn.onclick=()=>drop.classList.toggle('on');
+  wrap.append(btn,drop);
+  return{el:wrap,get:()=>multi?sel.join(' - '):sel,setBad:bad=>{btn.style.borderColor=bad?'var(--err)':'var(--line)'}};
+}
+
+// ===== Edit Trip =====
+function openEdit(t,isNew){
+  const defs=[['name','اسم المسافر','text',t.name||profile.name,'full'],['surname','اسم العائلة','text',t.surname||profile.surname,'ltr'],['booking','رقم الحجز','tel',t.booking,'ltr'],['date','تاريخ المغادرة','date',t.date,'ltr'],['time','وقت الإقلاع','time',t.time,'ltr'],['carrier','رمز الناقل','text',t.carrier,'ltr'],['flight','رقم الرحلة','tel',t.flight,'ltr'],['from','مطار المغادرة','picker',t.from||base,'ltr'],['to','الوجهة','picker-multi',t.to,'ltr'],['openH','يفتح قبل (ساعة)','number',t.openH||profile.openH||12,'ltr'],['closeH','يغلق قبل (ساعة)','number',t.closeH||profile.closeH||2,'ltr']];
+  const grid=h('div','g'),els={};
+  defs.forEach(([k,l,ty,v,c])=>{
+    const f=h('div','f'+(k==='name'||k==='to'?' full':'')),lb=h('label',null);
+    lb.innerHTML=(k==='name'?ICONS.user:k==='openH'||k==='closeH'?ICONS.clock:'')+l;
+    let i;
+    if(ty==='picker'||ty==='picker-multi'){const pk=airportPicker(v,ty==='picker-multi');i=pk.el;els[k]=pk}
+    else{i=document.createElement('input');i.type=ty;i.value=v==null?'':v;if(c==='ltr')i.className='ltr';if(k==='surname'||k==='carrier')i.style.textTransform='uppercase';i.oninput=()=>i.classList.remove('bad');els[k]=i}
+    f.append(lb,i);grid.appendChild(f)});
+  const exF=h('div','f full'),exT=document.createElement('textarea');
+  exF.append(h('label',null,'مسافرون آخرون (اسم في كل سطر)'),exT);
+  exT.value=(t.pax||[]).join('\n');exT.style.cssText='min-height:64px;width:100%;border:1.5px solid var(--line);border-radius:11px;background:var(--field);padding:10px 12px;font-size:14px;direction:ltr;text-align:left';
+  grid.appendChild(exF);els.extra=exT;
+  sheet(isNew?'راجع بيانات الرحلة':'تعديل الرحلة',[grid],[
+    {label:'إلغاء'},
+    {label:'حفظ',cls:'pri',keep:true,fn:()=>{
+      const v={};Object.keys(els).forEach(k=>{const el=els[k];v[k]=el.get?el.get():el.value.trim()});
+      const rules={booking:x=>/^\d{4,}$/.test(x),date:x=>!!x,time:x=>!!x,carrier:x=>/^[A-Za-z0-9]{2}$/.test(x),flight:x=>/^\d{1,4}$/.test(x),from:x=>/^[A-Za-z]{3}$/.test(x),to:x=>/[A-Z]{3}/.test(x),openH:x=>x!==''&&+x>=0,closeH:x=>x!==''&&+x>=0};
+      let ok=true;Object.keys(rules).forEach(k=>{const good=rules[k](v[k]);const el=els[k];if(el.setBad)el.setBad(!good);else if(el.classList)el.classList.toggle('bad',!good);if(!good)ok=false});
+      if(!ok){toast('راجع الحقول المظللة');return}
+      const n=Object.assign({},t,v,{surname:v.surname.toUpperCase(),carrier:v.carrier.toUpperCase(),from:v.from.toUpperCase(),openH:+v.openH,closeH:+v.closeH,pax:(v.extra||'').split(/\n+/).map(x=>x.trim()).filter(Boolean),upd:Date.now()});delete n.extra;
+      if(n.name)profile.name=n.name;
+      if(n.surname)profile.surname=n.surname;
+      profile.openH=n.openH;profile.closeH=n.closeH;
+      if(n.phones&&n.phones.length)profile.phones=n.phones;
+      trips=trips.filter(x=>x.id!==n.id&&!(x.booking===n.booking&&x.date===n.date&&x.flight===n.flight));
+      trips.push(n);save();closeSheet();render();toast('تم حفظ الرحلة');buzz(40);
+      // بعد أول رحلة — اسأل عن الإشعارات إن لم تكن مفعّلة
+      if(isNew)setTimeout(()=>askNotificationsIfNeeded(),800);
+    }}
+  ]);
+}
+function openAdd(){
+  const ta=document.createElement('textarea');ta.placeholder='ألصق رسالة تأكيد الحجز هنا...';ta.style.cssText='width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:12px;background:var(--field);padding:12px;font-size:13.5px;direction:ltr;text-align:left;resize:vertical';
+  const pb=h('button',null,'📋 لصق من الحافظة');pb.type='button';pb.style.cssText='width:100%;height:42px;margin-bottom:8px;border:1.5px dashed var(--line);border-radius:12px;background:var(--card);color:var(--navy2);font-size:14px;font-weight:700;cursor:pointer';
+  pb.onclick=async()=>{try{const x=((await navigator.clipboard.readText())||'').trim();if(!x)return toast('الحافظة فارغة');ta.value=x;toast('تم اللصق — اضغط «قراءة الرسالة»')}catch(e){toast('تعذّر الوصول للحافظة — اضغط مطولًا داخل الحقل ثم الصق');ta.focus()}};
+  sheet('إضافة رحلة جديدة',[pb,ta,para('أو أضف الرحلة يدويًا (سيتم تعبئة بياناتك المحفوظة).')],[
+    {label:'إلغاء'},
+    {label:'إضافة يدوية',fn:()=>openEdit({id:Date.now().toString(36),name:profile.name,surname:profile.surname,date:'',time:'',flight:'',booking:'',carrier:'OV',from:base,to:'',openH:profile.openH||12,closeH:profile.closeH||2,phones:profile.phones||[]},true)},
+    {label:'قراءة الرسالة',cls:'pri',keep:true,fn:()=>{const x=ta.value.trim();if(!x)return toast('ألصق الرسالة أولًا');const t=parseMsg(x);if(!t)return toast('تعذّر قراءة الرسالة');closeSheet();openEdit(t,true)}}
+  ]);
+  $('sheet').classList.add('ctr');
+}
+
+// ===== URL + Precheck =====
+function buildUrl(t){const d=t.date.split('-');const q=new URLSearchParams({'request.Surname':t.surname,'request.BookingCode':t.booking,'request.CarrierCode':t.carrier,'request.FlightNumber':t.flight,'request.BoardingPoint':t.from,'request.DepartureDate':d[2]+'/'+d[1]+'/'+d[0]});return 'https://iport.travelport.com/ici/ov/en/Home/FindPassenger?'+q.toString().replace(/%2F/g,'/')}
+async function precheck(url){
+  const target=PROXY?PROXY+(PROXY.includes('?')?'&':'?')+'u='+encodeURIComponent(url):url;
+  const ctrl=new AbortController(),tm=setTimeout(()=>ctrl.abort(),15000);
+  try{
+    const r=await fetch(target,{credentials:'omit',signal:ctrl.signal});
+    const doc=new DOMParser().parseFromString(await r.text(),'text/html');
+    const bad=/incorrect|invalid|error|not found|not available|unable|failed|no booking/i;
+    for(const n of doc.querySelectorAll('.alert-danger,.alert-error,.validation-summary-errors,.field-validation-error,[role="alert"],.alert,.error')){const x=n.textContent.replace(/\s+/g,' ').trim();if(x&&bad.test(x))return{readable:true,error:x}}
+    return{readable:true,error:r.ok?'':'HTTP '+r.status};
+  }catch(e){return{readable:false}}finally{clearTimeout(tm)}
+}
+let timer,run=0;
+function closeAll(){run++;clearTimeout(timer);$('ov').classList.remove('on');$('viewer').classList.remove('on');$('fr').onload=null;$('fr').src='about:blank'}
+function failSheet(t,orig,url){
+  const lines=[];let title='تعذّر إكمال التسجيل';
+  if(/flight details|flight number|departure/i.test(orig)){title='لا يوجد حجز متاح للتسجيل حاليًا';lines.push('هذه رسالة الموقع عندما لا يكون التسجيل مفتوحًا لهذا الحجز بعد.');lines.push('إن كان التسجيل مفتوحًا فعلًا، راجع رقم الرحلة والمطار والتاريخ.')}
+  else if(/booking|e-?ticket|surname|passenger|reservation/i.test(orig)){title='لم يتم العثور على الحجز';lines.push('راجع رقم الحجز واسم العائلة كما هما في التذكرة.')}
+  else lines.push('راجع بيانات الحجز ثم أعد المحاولة.');
+  const o=h('div','orig',orig);
+  sheet(title,lines.map(para).concat([o]),[{label:'إغلاق'},{label:'تعديل الرحلة',fn:()=>openEdit(t,false)},{label:'فتح الصفحة',cls:'pri',fn:()=>{location.href=url}}]);
+}
+async function startCheckin(t,force){
+  const st=state(t);
+  if(!force&&st.k!=='open'){sheet('التسجيل غير متاح الآن',[para(st.txt+'.'),para(st.sub+'.'),para('يمكنك المحاولة على أي حال، وقد يرفض الموقع الطلب.')],[{label:'إغلاق'},{label:'حاول على أي حال',cls:'pri',fn:()=>startCheckin(t,true)}]);return}
+  if(!navigator.onLine){sheet('لا يوجد اتصال بالإنترنت',[para('التسجيل يحتاج إنترنت. تحقق من الاتصال ثم أعد المحاولة.'),para('رحلاتك وبطاقات الصعود المحفوظة تبقى متاحة بدون إنترنت.')],[{label:'إغلاق'},{label:'إعادة المحاولة',cls:'pri',fn:()=>startCheckin(t,force)}]);return}
+  const url=buildUrl(t),fr=$('fr'),my=++run;
+  $('ov').classList.add('on');$('ob').style.display='none';$('ovMsg').textContent='جارٍ التحقق من الحجز';$('ovSub').textContent='قد يستغرق الموقع بضع ثوانٍ';
+  const res=await precheck(url);
+  if(my!==run)return;
+  if(res.readable&&res.error){$('ov').classList.remove('on');failSheet(t,res.error,url);return}
+  $('ovMsg').textContent='جارٍ تجهيز التسجيل';
+  fr.onload=()=>{if(!fr.src||fr.src==='about:blank')return;clearTimeout(timer);$('ov').classList.remove('on');$('viewer').classList.add('on')};
+  fr.src=url;
+  timer=setTimeout(()=>{$('ovMsg').textContent='الموقع بطيء أو لا يسمح بالعرض داخل التطبيق';$('ovSub').textContent='افتح الصفحة مباشرة لإكمال التسجيل';$('ob').style.display='flex';$('fb').onclick=()=>{location.href=url}},8000);
+}
+$('cb').onclick=closeAll;$('bk').onclick=closeAll;
+
+// ===== Parse Message =====
+function parseMsg(txt){
+  const clean=txt.replace(/\s+/g,' ').trim();
+  const g=re=>{const m=clean.match(re);return m?m[1].trim():''};
+  const dateMatch=clean.match(/\b(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})\b/);
+  if(!dateMatch)return null;
+  const[,dd,mm,yy]=dateMatch;
+  const flight=g(/Flight\s*(?:Number|No\.?|#)?\s*:?\s*(\d+)/i);
+  const booking=g(/Booking\s*(?:No\.?|Number|Code|Ref)?\s*:?\s*(\d+)/i)||g(/BookingCode=(\d+)/i);
+  if(!flight||!booking)return null;
+  const timeMatch=clean.match(/Dep(?:arture)?\s*Time\s*:?\s*(\d{1,2}:\d{2})/i);
+  const tm=timeMatch?timeMatch[1].split(':'):[];
+  const name=g(/Dear\s+(.+?)\s*[,.]/i).replace(/\s+/g,' ');
+  const route=clean.match(/From\s+(.+?)\s+To\s+(.+?)(?:\.|\s*-|\s*Dep)/i);
+  const fromCode=route?(route[1].match(/[A-Z]{3}/)||[])[0]:'';
+  const phones=(clean.match(/\(([\d\s\/,+\-]+)\)/)||[])[1]||'';
+  return{id:Date.now().toString(36),name,surname:name?name.split(/\s+/).pop():'',date:`${yy}-${pad(mm)}-${pad(dd)}`,time:tm.length===2?pad(tm[0])+':'+tm[1]:'',flight,booking,carrier:(g(/CarrierCode=([A-Za-z0-9]{2})/)||'OV').toUpperCase(),from:(g(/BoardingPoint=([A-Za-z]{3})/)||fromCode||base).toUpperCase(),to:route?route[2].trim():'',ref:g(/Trip on\s+([A-Z0-9]+)/i),openH:+g(/opens\s+(\d+)\s*hours?\s+before/i)||profile.openH||12,closeH:+g(/closes\s+(\d+)\s*hours?\s+(?:prior|before)/i)||profile.closeH||2,phones:phones.split(/[\/,\s]+/).filter(x=>x.replace(/\D/g,'').length>=7),raw:txt};
+}
+
+// ===== Calendar =====
+async function icsFor(t){
+ const f=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+'00';
+ const stamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z',o=openOf(t),dp=depOf(t);
+ const escICS=x=>String(x||'').replace(/\\/g,'\\\\').replace(/,/g,'\\,').replace(/;/g,'\\;').replace(/\n/g,'\\n');
+ const ev=(id,title,s,e,al)=>['BEGIN:VEVENT','UID:'+t.id+id+'@trips','DTSTAMP:'+stamp,'DTSTART;TZID=Asia/Muscat:'+f(s),'DTEND;TZID=Asia/Muscat:'+f(e),'SUMMARY:'+escICS(title)].concat(al?['BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+escICS(title),'END:VALARM']:[]).concat(['END:VEVENT']).join('\r\n');
+ const title='رحلة '+t.carrier+' '+t.flight;
+ const details=['رقم الحجز: '+(t.booking||'—'),'من '+(NAMES[t.from]||t.from)+' إلى '+(NAMES[t.to]||t.to||'—'),'يفتح تسجيل الوصول: '+fdate(o)+' '+ftime(o)].join('\n');
+ const body=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Trips//AR//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',ev('o','فتح تسجيل الوصول '+t.carrier+' '+t.flight,o,new Date(+o+9e5),true),ev('f',title,dp,new Date(+dp+36e5),false),'END:VCALENDAR'].join('\r\n');
+ const blob=new Blob([body],{type:'text/calendar;charset=utf-8'});
+ const file=new File([blob],'flight-'+t.flight+'.ics',{type:'text/calendar'});
+ const googleDates=f(o)+'/'+f(new Date(+o+9e5));
+ const googleUrl='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('فتح تسجيل الوصول '+t.carrier+' '+t.flight)+'&dates='+encodeURIComponent(googleDates)+'&details='+encodeURIComponent(details)+'&ctz=Asia%2FMuscat';
+ const flightDates=f(dp)+'/'+f(new Date(+dp+36e5));
+ const googleFlightUrl='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+encodeURIComponent(flightDates)+'&details='+encodeURIComponent(details)+'&ctz=Asia%2FMuscat';
+ const download=()=>{const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='flight-'+t.flight+'.ics';a.style.display='none';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),15000);toast('تم تنزيل ملف التقويم')};
+ const openGoogle=url=>{const isAndroid=/Android/i.test(navigator.userAgent||'');if(isAndroid){const fallback=encodeURIComponent(url);const intent='intent://calendar.google.com/calendar/render?'+url.split('?')[1]+'#Intent;scheme=https;package=com.google.android.calendar;S.browser_fallback_url='+fallback+';end';try{location.href=intent;setTimeout(()=>{if(document.visibilityState==='visible')location.href=url},900)}catch(e){location.href=url}}else{const w=window.open(url,'_blank');if(!w)location.href=url}};
+ const shareCalendar=async()=>{if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:'إضافة الرحلة إلى التقويم',text:title});return}catch(e){if(e&&e.name==='AbortError')return}}download()};
+ sheet('إضافة الرحلة إلى التقويم',[para('اختر الطريقة المناسبة لجهازك.'),para('يمكنك إضافة موعد فتح تسجيل الوصول أو موعد الرحلة.')],[
+   {label:'إلغاء'},
+   {label:'Google — تسجيل الوصول',cls:'pri',fn:()=>openGoogle(googleUrl)},
+   {label:'Google — موعد الرحلة',fn:()=>openGoogle(googleFlightUrl)},
+   {label:'مشاركة',fn:shareCalendar},
+   {label:'تنزيل ICS',fn:download}
+ ]);
+}
+
+// ===== Summary/Copy =====
+function summary(t){const x=summary0(t);return t.pax&&t.pax.length?x+'\nالمسافرون: '+[t.name].concat(t.pax).filter(Boolean).join('، '):x}
+function summary0(t){const d=depOf(t),o=openOf(t);return['رحلة '+t.carrier+' '+t.flight,'من '+(NAMES[t.from]||t.from)+' ('+t.from+')'+(t.to?' إلى '+t.to:''),fdate(d)+' الساعة '+ftime(d),'رقم الحجز: '+t.booking,'يفتح التسجيل: '+fdate(o)+' '+ftime(o)].join('\n')}
+function copySheet(title,text,onCopy){
+  const ta=document.createElement('textarea');ta.value=text;ta.readOnly=true;ta.style.minHeight='140px';ta.style.direction='rtl';ta.style.textAlign='right';
+  sheet(title,[ta],[{label:'إغلاق'},{label:'نسخ',cls:'pri',keep:true,fn:()=>{ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}if(!ok&&navigator.clipboard)navigator.clipboard.writeText(text).catch(()=>{});toast('تم النسخ');if(onCopy)onCopy()}}]);
+}
+function escHtml(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+// ===== Ticket Viewer =====
+let ticketCurrent=null;
+function ticketDocument(t){
+ const d=depOf(t),o=openOf(t);
+ return `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+ *{box-sizing:border-box}body{font-family:Arial,sans-serif;margin:0;padding:20px;background:#eef2f7;color:#0a1f3d}.ticket{max-width:620px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 24px #0a1f3d18}
+ header{background:linear-gradient(135deg,#0a1f3d,#163a6b);color:#fff;padding:22px}header small{opacity:.8}h1{font-size:22px;margin:5px 0 0}.route{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:20px}.airport{font-size:27px;font-weight:bold;direction:ltr}.airport small{display:block;font-size:12px;direction:rtl}
+ .body{padding:18px}.row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #e2e8f0}.label{color:#64748b;font-size:13px}.val{font-weight:700;text-align:left;overflow-wrap:anywhere}.note{margin-top:16px;padding:12px;background:#f8fafc;border-radius:10px;font-size:12px;color:#64748b}
+ @media print{body{padding:0;background:#fff}.ticket{box-shadow:none;border-radius:0;max-width:none}}</style></head><body><article class="ticket"><header><small>رحلاتي · بطاقة الرحلة</small><h1>${escHtml(t.carrier)} ${escHtml(t.flight)}</h1><div class="route"><div class="airport">${escHtml(t.from)}<small>${escHtml(NAMES[t.from]||t.from)}</small></div><div>✈ ─ ─ ─</div><div class="airport">${escHtml(t.to||'—')}<small>${escHtml((t.to||'').split(/[ -]+/).map(x=>NAMES[x]||'').filter(Boolean).join(' · '))}</small></div></div></header><div class="body">
+ <div class="row"><span class="label">المسافر</span><span class="val">${escHtml([t.name,t.surname].filter(Boolean).join(' '))}</span></div>
+ <div class="row"><span class="label">تاريخ المغادرة</span><span class="val">${escHtml(fdate(d))}</span></div><div class="row"><span class="label">وقت الإقلاع</span><span class="val">${escHtml(ftime(d))}</span></div>
+ <div class="row"><span class="label">رقم الحجز</span><span class="val">${escHtml(t.booking)}</span></div><div class="row"><span class="label">يفتح تسجيل الوصول</span><span class="val">${escHtml(fdate(o)+' · '+ftime(o))}</span></div>
+ <div class="note">بطاقة معلوماتية من تطبيق رحلاتي، وليست بطاقة صعود رسمية.</div></div></article></body></html>`;
+}
+let ticketHistoryPushed=false;
+function makePdf(t){ticketCurrent=t;$('ticketFrame').srcdoc=ticketDocument(t);$('ticketViewer').classList.add('on');if(!ticketHistoryPushed){try{history.pushState({ticketViewer:true},'','#ticket-preview');ticketHistoryPushed=true}catch(e){}}}
+function closeTicketViewer(fromPop=false){$('ticketViewer').classList.remove('on');$('ticketFrame').srcdoc='';ticketCurrent=null;if(ticketHistoryPushed){ticketHistoryPushed=false;if(!fromPop&&history.state&&history.state.ticketViewer){try{history.back()}catch(e){}}}}
+function printTicket(){try{$('ticketFrame').contentWindow.focus();$('ticketFrame').contentWindow.print()}catch(e){toast('تعذرت الطباعة')}}
+function downloadTicketImage(){
+ const t=ticketCurrent;if(!t)return;const d=depOf(t),o=openOf(t),canvas=document.createElement('canvas');canvas.width=1200;canvas.height=1450;
+ const c=canvas.getContext('2d');c.fillStyle='#eef2f7';c.fillRect(0,0,1200,1450);c.fillStyle='#fff';c.fillRect(50,50,1100,1350);c.fillStyle='#0a1f3d';c.fillRect(50,50,1100,300);
+ c.fillStyle='#fff';c.textAlign='right';c.direction='rtl';c.font='30px Arial';c.fillText('رحلاتي · بطاقة الرحلة',1080,110);c.font='bold 58px Arial';c.fillText(t.carrier+' '+t.flight,1080,205);
+ c.font='bold 42px Arial';c.textAlign='left';c.direction='ltr';c.fillText(t.from,100,290);c.textAlign='right';c.direction='rtl';c.fillText(t.to||'—',1080,290);
+ const rows=[['المسافر',[t.name,t.surname].filter(Boolean).join(' ')||'—'],['تاريخ المغادرة',fdate(d)],['وقت الإقلاع',ftime(d)],['رقم الحجز',t.booking],['يفتح تسجيل الوصول',fdate(o)+' · '+ftime(o)]];
+ let y=430;rows.forEach(([label,value])=>{c.strokeStyle='#e2e8f0';c.beginPath();c.moveTo(100,y+35);c.lineTo(1100,y+35);c.stroke();c.fillStyle='#64748b';c.font='28px Arial';c.textAlign='right';c.direction='rtl';c.fillText(label,1080,y);c.fillStyle='#0a1f3d';c.font='bold 31px Arial';c.textAlign='left';c.fillText(String(value||'—'),100,y);y+=155});
+ c.fillStyle='#64748b';c.font='23px Arial';c.textAlign='center';c.fillText('بطاقة معلوماتية — ليست بطاقة صعود رسمية',600,1330);
+ canvas.toBlob(blob=>{if(!blob)return toast('تعذر إنشاء الصورة');const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='رحلتي-'+t.carrier+'-'+t.flight+'.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);toast('تم تجهيز صورة الرحلة')},'image/png');
+}
+$('ticketBack').onclick=closeTicketViewer;$('ticketPrint').onclick=printTicket;$('ticketPdf').onclick=printTicket;$('ticketImage').onclick=downloadTicketImage;
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('ticketViewer').classList.contains('on'))closeTicketViewer()});
+window.addEventListener('popstate',()=>{if($('ticketViewer').classList.contains('on'))closeTicketViewer(true)});
+
+// ===== زر الرجوع: يغلق النافذة/العارض المفتوح بدل الخروج من التطبيق =====
+let layerOn=false;
+const anyLayer=()=>!$('dlg').hidden||$('viewer').classList.contains('on')||$('ov').classList.contains('on');
+function updLayer(){
+  const a=anyLayer();
+  if(a&&!layerOn){try{history.pushState({layer:1},'');layerOn=true}catch(e){}}
+  else if(!a&&layerOn){layerOn=false;if(history.state&&history.state.layer){try{history.back()}catch(e){}}}
+}
+['dlg','viewer','ov'].forEach(id=>new MutationObserver(updLayer).observe($(id),{attributes:true,attributeFilter:['class','hidden']}));
+// عزل الخلفية + إرجاع التركيز + زر Esc
+let opener=null;
+new MutationObserver(()=>{
+  const op=!$('dlg').hidden;
+  if(op)opener=document.activeElement;
+  ['.hd','.m','#addFab','#banner','#mini'].forEach(q=>{const e=document.querySelector(q);if(e)e.inert=op});
+  if(!op&&opener&&opener!==document.body&&document.contains(opener)){try{opener.focus({preventScroll:true})}catch(e){}opener=null}
+}).observe($('dlg'),{attributes:true,attributeFilter:['hidden']});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  if(!$('dlg').hidden)closeSheet();
+  else if($('ticketViewer').classList.contains('on'))closeTicketViewer();
+  else if($('viewer').classList.contains('on')||$('ov').classList.contains('on'))closeAll();
+});
+window.addEventListener('popstate',()=>{
+  if(!layerOn)return;layerOn=false;
+  if($('viewer').classList.contains('on')||$('ov').classList.contains('on'))closeAll();
+  else if(!$('dlg').hidden)closeSheet();
+  updLayer();
+});
+
+// ===== Card Render =====
+function arcSvg(){
+  const P='M114 46 C100 -6,20 -6,6 46';
+  const still=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const glyph='<g transform="rotate(90)"><g transform="translate(-12 -12) scale(.78)"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></g></g>';
+  const plane=still?'<g class="pl" transform="translate(60 8) rotate(180)">'+glyph+'</g>':'<g class="pl">'+glyph+'<animateMotion dur="9s" repeatCount="indefinite" rotate="auto" path="'+P+'" calcMode="spline" keyTimes="0;.9;1" keyPoints="0;1;1" keySplines=".4 0 .6 1;0 0 1 1"/><animate attributeName="opacity" dur="9s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;.05;.85;.92;1"/></g>';
+  return '<svg class="arc" viewBox="0 0 120 52" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path class="trail" d="'+P+'"/><circle class="dot" cx="114" cy="46" r="2.4"/><circle class="dot" cx="6" cy="46" r="2.4"/>'+plane+'</svg>';
+}
+function card(t){
+  const st=state(t),c=h('div','card'),band=h('div','band');
+  const route=h('div','route');
+  const a=h('div','pt r');a.append(h('b',null,t.from),h('small',null,NAMES[t.from]||''));
+  const pathWrap=h('div','path-wrap');pathWrap.innerHTML=arcSvg();
+  const codes=(t.to.match(/[A-Z]{3}/g)||[t.to||'—']);
+  const b=h('div','pt');b.append(h('b',null,codes.join(' · ')),h('small',null,codes.map(x=>NAMES[x]||'').filter(Boolean).join(' · ')));if(codes.length>1)b.firstChild.style.fontSize='18px';
+  route.append(a,pathWrap,b);
+  const d=depOf(t);
+  const times=h('div','times');times.innerHTML=`<span>${ftime(d)}</span><span>${t.carrier} ${t.flight}</span><span>${ftime(new Date(+d+36e5))}</span>`;
+  band.append(route,times);
+  const body=h('div','body'),pill=h('div','pill k-'+st.k);pill.append(h('span',null,st.txt),h('small',null,st.sub));
+  const grid=h('div','grid');
+  [['التاريخ',fdate(d)],['الإقلاع',ftime(d)],['الرحلة',t.carrier+' '+t.flight],['رقم الحجز',t.booking]].forEach(([k,v])=>{const it=h('div','it');it.append(h('small',null,k),h('b',null,v));grid.appendChild(it)});
+  const who=h('div','who',(t.name||t.surname||'')+((t.pax&&t.pax.length)?' + '+t.pax.join('، '):'')+' • التسجيل يفتح قبل '+t.openH+' ساعة ويغلق قبل '+t.closeH+(t.closeH==2?' ساعتين':' ساعة'));
+  if(t.done)who.appendChild(h('span','donebadge','✓ تم التسجيل'));
+  const mline=monLine(t);
+  const acts=h('div','acts');
+  const go=h('button','pri'+(st.k==='open'?' ok':''),st.k==='open'?'تسجيل الوصول الآن':'تسجيل الوصول');go.onclick=()=>startCheckin(t);acts.appendChild(go);
+  const mk=(txt,icon,fn,cls)=>{const x=h('button',cls||'');x.innerHTML=icon+' '+txt;x.onclick=fn;acts.appendChild(x)};
+  mk('تعديل',ICONS.edit,()=>openEdit(t,false));
+  mk('حذف',ICONS.del,()=>sheet('حذف الرحلة',[para('سيتم حذف رحلة '+t.carrier+' '+t.flight+'.')],[{label:'إلغاء'},{label:'حذف',cls:'pri',fn:()=>softDelete(t)}]),'del');
+  mk('نسخ',ICONS.copy,()=>{const opts=[{label:'ملخص الرحلة',fn:()=>copySheet('ملخص الرحلة',summary(t))}];if(t.raw)opts.push({label:'رسالة الحجز الأصلية',fn:()=>copySheet('رسالة الحجز',t.raw)});if(opts.length===1)opts[0].fn();else sheet('ماذا تريد نسخه؟',opts.map(o=>para(o.label)),opts.map(o=>({label:o.label,fn:o.fn})))});
+  mk('PDF',ICONS.pdf,()=>makePdf(t));
+  mk('تقويم',ICONS.cal,()=>icsFor(t));
+  mk('إيميل',ICONS.mail,()=>sendTicketByEmail(t));
+  mk(t.done?'إلغاء «تم»':'تم التسجيل',ICONS.check,()=>{t.done=!t.done;t.upd=Date.now();save();render();toast(t.done?'أُوقفت إشعارات هذه الرحلة':'أُعيدت المراقبة')});
+  mk('بطاقة الصعود',ICONS.ticket,()=>passSheet(t));
+  if(t.phones&&t.phones.length){mk('اتصال',ICONS.phone,()=>{if(t.phones.length===1)location.href='tel:'+t.phones[0];else{const lines=t.phones.map(p=>para(p));sheet('اختر رقمًا',lines,t.phones.map(p=>({label:p,fn:()=>{location.href='tel:'+p}})))}})}
+  body.append(pill,grid,who);if(mline)body.appendChild(mline);body.appendChild(acts);c.append(band,body);return c;
+}
+
+// ===== Banner =====
+async function renderBanner(){
+  const hasPush=await hasPushSubscription();
+  const now=Date.now(),L=[];
+  const mk=(cls,icon,txt,label,fn)=>{const b=h('div','bnr '+cls);b.innerHTML=icon+'<span></span>';b.querySelector('span').textContent=txt;if(label){const btn=h('button',null,label);btn.type='button';btn.onclick=fn;b.appendChild(btn)}return b};
+  const nm=t=>t.carrier+' '+t.flight;
+  const live=trips.filter(t=>t.date&&t.time&&!t.done&&state(t).k!=='past');
+  // 1) التسجيل مفتوح الآن (+ وقت الإغلاق إن اقترب)
+  const openTrip=live.find(t=>state(t).k==='open');
+  if(openTrip){const left=+closeOf(openTrip)-now;L.push(mk('urgent',ICONS.clock,'التسجيل مفتوح الآن: '+nm(openTrip)+(left>0&&left<3*36e5?' — يغلق بعد '+dur(left):''),'سجّل',()=>startCheckin(openTrip)))}
+  // 2) تفعيل الإشعارات
+  const pushOk='serviceWorker'in navigator&&'PushManager'in window&&window.isSecureContext&&typeof Notification!=='undefined'&&Notification.permission!=='denied';
+  const emailOn=profile.emailNotify!==false&&!!profile.email;
+  if(!hasPush&&live.length&&auth.token&&(pushOk||!emailOn))L.push(mk('',ICONS.bell,'فعّل الإشعارات لتصلك تنبيهات فتح التسجيل','تفعيل',askNotificationsIfNeeded));
+  // 3) التسجيل يفتح قريبًا (خلال ساعتين)
+  const soon=live.filter(t=>state(t).k==='wait'&&+openOf(t)-now<2*36e5).sort((a,b)=>openOf(a)-openOf(b))[0];
+  if(soon)L.push(mk('info',ICONS.clock,'يفتح التسجيل لرحلة '+nm(soon)+' بعد '+dur(+openOf(soon)-now),'',null));
+  // 4) الإقلاع قريب (خلال 3 ساعات)
+  const dep=trips.filter(t=>t.date&&t.time&&+depOf(t)>now&&+depOf(t)-now<3*36e5).sort((a,b)=>depOf(a)-depOf(b))[0];
+  if(dep)L.push(mk('ok',ICONS.plane,'رحلة '+nm(dep)+' تقلع بعد '+dur(+depOf(dep)-now)+' — توجّه للمطار','',null));
+  // 5) سُجّل الوصول لكن بطاقة الصعود غير محفوظة
+  const np=trips.find(t=>t.date&&t.time&&t.done&&!t.pass&&+depOf(t)>now);
+  if(np)L.push(mk('info',ICONS.ticket,'احفظ بطاقة الصعود لرحلة '+nm(np)+' لتظهر بدون إنترنت','حفظ',()=>passSheet(np)));
+  // 6) تذكير بالنسخة الاحتياطية (كل 14 يومًا)
+  const lb=LS.get('lastBackup',0),sn=LS.get('bkSnooze',0);
+  if(trips.length&&now-lb>14*864e5&&now>sn){
+    const bb=mk('gray',ICONS.copy,lb?'مرّ أكثر من أسبوعين على آخر نسخة احتياطية':'لم تأخذ نسخة احتياطية من رحلاتك بعد','نسخ الآن',()=>$('bExp').click());
+    const lt=h('button',null,'لاحقًا');lt.type='button';lt.style.cssText='background:transparent!important;color:inherit!important;border:1px solid currentColor!important;margin-inline-start:6px';lt.onclick=()=>{LS.set('bkSnooze',Date.now()+7*864e5);renderBanner()};
+    bb.append(lt);L.push(bb);
+  }
+  // 7) الاتصال والمزامنة
+  if(!navigator.onLine)L.push(mk('gray',ICONS.bell,'أنت غير متصل — رحلاتك المحفوظة متاحة، والتسجيل يحتاج إنترنت','',null));
+  else if(syncFail&&auth.token)L.push(mk('gray',ICONS.bell,'تعذّرت المزامنة مع السحابة','إعادة',()=>pushNow().then(()=>renderBanner())));
+  $('banner').replaceChildren(...L.slice(0,3));
+}
+
+// ===== تنبيهات محلية (تعمل والتطبيق مفتوح؛ الإشعارات الخلفية يرسلها الخادم) =====
+function pushLocal(title,body,tag){
+  toast(title+' — '+body);
+  try{navigator.vibrate&&navigator.vibrate([250,120,250])}catch(e){}
+  try{
+    if(!('Notification'in window)||Notification.permission!=='granted')return;
+    const opt={body,tag,dir:'rtl',lang:'ar'};
+    if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)navigator.serviceWorker.getRegistration().then(r=>{if(r&&r.showNotification)r.showNotification(title,opt);else new Notification(title,opt)}).catch(()=>{});
+    else new Notification(title,opt);
+  }catch(e){}
+}
+function localAlerts(){
+  const now=Date.now(),fired=LS.get('fired',{});let ch=false;
+  trips.forEach(t=>{
+    if(!t.date||!t.time)return;
+    const dep=+depOf(t),o=+openOf(t),c=+closeOf(t),nm=t.carrier+' '+t.flight,list=[];
+    if(!t.done)list.push(['o60',o-36e5,'يفتح التسجيل خلال ساعة','رحلة '+nm+' — جهّز بيانات الحجز'],['o10',o-6e5,'يفتح التسجيل خلال 10 دقائق','رحلة '+nm],['c60',c-36e5,'يغلق التسجيل خلال ساعة','رحلة '+nm+' — سجّل الآن قبل الإغلاق']);
+    list.push(['d180',dep-108e5,'رحلتك بعد 3 ساعات','رحلة '+nm+' — تأكد من جاهزيتك للتوجه للمطار']);
+    list.forEach(([k,at,ti,bo])=>{const key=t.id+':'+k+':'+dep;if(fired[key])return;if(now>=at&&now<at+6e5&&now<dep){fired[key]=now;ch=true;pushLocal(ti,bo,key)}});
+  });
+  Object.keys(fired).forEach(k=>{if(now-fired[k]>7*864e5){delete fired[k];ch=true}});
+  if(ch)LS.set('fired',fired);
+}
+
+// ===== Notifications Prompt =====
+async function askNotificationsIfNeeded(){
+  if(!auth.token){toast('سجّل دخول أولًا');return}
+  const hasPush=await hasPushSubscription();
+  if(hasPush&&profile.emailNotify!==false)return; // مفعّل
+  const emailI=h('input');emailI.type='email';emailI.value=profile.email||auth.email||'';emailI.placeholder='you@example.com';emailI.className='ltr';emailI.inputMode='email';
+  const f=h('div','f full');f.append(h('label',null,'📧 الإيميل'),emailI);
+
+  const cb=h('input');cb.type='checkbox';cb.checked=profile.emailNotify!==false;
+  const lbl=h('label','auth-check');
+  lbl.style.cssText='margin:12px 0;display:flex;align-items:center;gap:10px;padding:12px;background:var(--field);border-radius:10px;cursor:pointer;font-size:13.5px;color:var(--navy2)';
+  lbl.append(cb,document.createTextNode('أرسل لي تنبيهات فتح التسجيل + نسخة من التذكرة'));
+
+  sheet('🔔 لا تفوّت تسجيل الوصول',[
+    para('سنرسل لك تنبيهات على إشعارات هاتفك. اختياريًا، وإلى إيميلك أيضًا.'),
+    f,
+    lbl,
+    para('إن لم ترغب، يمكنك التخطي — لكنك قد تفوّت وقت فتح التسجيل.')
+  ],[
+    {label:'لاحقًا'},
+    {label:'حفظ وتفعيل',cls:'pri',keep:true,fn:async()=>{
+      const em=emailI.value.trim().toLowerCase();
+      if(em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){emailI.classList.add('bad');toast('إيميل غير صحيح');return}
+      profile.email=em||profile.email;
+      profile.emailNotify=cb.checked;
+      LS.set('profile',profile);
+      await pushNow();
+      const emailOn=cb.checked&&!!profile.email;
+      const supported='serviceWorker'in navigator&&'PushManager'in window&&window.isSecureContext&&typeof Notification!=='undefined';
+      let pushed=await hasPushSubscription(),why='';
+      if(!pushed){
+        if(!supported)why='unsupported';
+        else if(Notification.permission==='denied')why='blocked';
+        else{pushed=await enablePush(true);if(!pushed)why=Notification.permission==='denied'?'blocked':Notification.permission==='granted'?'failed':'declined'}
+      }
+      closeSheet();renderBanner();
+      const reason={unsupported:'إشعارات الهاتف غير متاحة هنا (تحتاج فتح التطبيق عبر https)',blocked:'إشعارات الهاتف محظورة — فعّلها من إعدادات المتصفح أو التطبيق',declined:'لم تتم الموافقة على إشعارات الهاتف',failed:'تعذّر ربط إشعارات الهاتف حاليًا — حاول لاحقًا'}[why];
+      if(pushed&&emailOn)toast('✅ تم تفعيل إشعارات الهاتف والإيميل',4000);
+      else if(pushed)toast('✅ تم تفعيل إشعارات الهاتف',4000);
+      else if(emailOn)toast('✅ تم تفعيل تنبيهات الإيميل — '+reason,6000);
+      else toast('لم يتم تفعيل أي تنبيه — '+reason,6000);
+    }}
+  ]);
+}
+
+// ===== Render =====
+function render(){
+  $('baseTxt').textContent=(NAMES[base]?NAMES[base]+' ':'')+'('+base+')';
+  $('miniBase').textContent=base;
+  const L=$('list'),now=Date.now();L.innerHTML='';
+  if(!trips.length){
+    const empty=h('div','empty');
+    const illu=h('div','empty-illu');
+    illu.innerHTML=`<svg viewBox="0 0 915 446" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="ribGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="915" y2="0">
+          <stop offset="0" stop-color="#0e2d5c"/>
+          <stop offset=".40" stop-color="#17396b"/>
+          <stop offset=".50" stop-color="#c79c4c"/>
+          <stop offset=".58" stop-color="#f0aa2e"/>
+          <stop offset="1" stop-color="#f4b02b"/>
+        </linearGradient>
+      </defs>
+      <path d="M-20 245 C60 320 170 378 300 378 C430 378 520 320 620 240 C690 184 750 158 800 160 C860 162 900 210 935 275" fill="none" stroke="url(#ribGrad)" stroke-width="40" stroke-linecap="butt"/>
+      <path d="M-20 245 C60 320 170 378 300 378 C430 378 520 320 620 240 C690 184 750 158 800 160 C860 162 900 210 935 275" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.6" stroke-dasharray="6 6"/>
+      <path d="M4 135 C90 235 180 298 275 298 C345 298 400 285 434 262" fill="none" stroke="#0e2d5c" stroke-width="1.6" stroke-dasharray="6 6" stroke-linecap="round"/>
+      <path d="M539 175 C620 125 700 88 775 87 C840 86 890 105 915 125" fill="none" stroke="#e8a317" stroke-width="1.6" stroke-dasharray="6 6" stroke-linecap="round"/>
+      <g class="plane-f"><g transform="translate(474 222) rotate(55) scale(1.6)" style="filter:drop-shadow(0 3px 3px rgba(10,31,61,.25))" fill="#fff" stroke="#0e2d5c" stroke-width="1.1" stroke-linejoin="round">
+        <path d="M-30 10 L-4 -6 L-4 6 L-30 15 Z"/>
+        <path d="M30 10 L4 -6 L4 6 L30 15 Z"/>
+        <path d="M-12 28 L-3 20 L-3 27 L-12 31 Z"/>
+        <path d="M12 28 L3 20 L3 27 L12 31 Z"/>
+        <rect x="-19" y="5" width="4.5" height="9" rx="2.2"/>
+        <rect x="14.5" y="5" width="4.5" height="9" rx="2.2"/>
+        <path d="M0 -29 C3.2 -29 4.2 -20 4.2 -12 L4.2 18 C4.2 24 2 28.5 0 31 C-2 28.5 -4.2 24 -4.2 18 L-4.2 -12 C-4.2 -20 -3.2 -29 0 -29 Z"/>
+        <path d="M0 -24 C1.6 -24 2.3 -21 2.3 -18 L-2.3 -18 C-2.3 -21 -1.6 -24 0 -24 Z" fill="#0e2d5c" stroke="none"/>
+      </g></g>
+    </svg>`;
+    empty.appendChild(illu);
+    L.appendChild(empty);
+    renderBanner();
+    return;
+  }
+  const s=[...trips].sort((x,y)=>{const px=depOf(x)<now,py=depOf(y)<now;return px!==py?(px?1:-1):(px?depOf(y)-depOf(x):depOf(x)-depOf(y))});
+  s.forEach(t=>{const w=h('div');w.style.marginBottom='12px';w.appendChild(card(t));L.appendChild(w.firstChild);L.lastChild.style.marginBottom='12px'});
+  renderBanner();
+}
+
+// ===== Ticker =====
+const last={};
+function tick(){
+  trips.forEach(t=>{const k=state(t).k;if(last[t.id]==='wait'&&k==='open'){toast('فُتح التسجيل لرحلة '+t.carrier+' '+t.flight);try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}}last[t.id]=k});
+  localAlerts();
+  if($('dlg').hidden&&!$('viewer').classList.contains('on'))render();
+}
+
+// ===== Events =====
+$('addFab').onclick=openAdd;
+$('miniChg').onclick=()=>$('setBase').click();
+window.addEventListener('scroll',()=>$('mini').classList.toggle('on',scrollY>150),{passive:true});
+$('setBase').onclick=()=>{const pk=airportPicker(base);sheet('مطار الانطلاق الثابت',[para('يُستخدم كقيمة افتراضية.'),pk.el],[{label:'إلغاء'},{label:'حفظ',cls:'pri',keep:true,fn:()=>{base=pk.get();save();closeSheet();render();toast('تم التحديث')}}])};
+$('bProfile').onclick=()=>{
+  const nameI=document.createElement('input');nameI.value=profile.name||'';nameI.placeholder='الاسم';
+  const surI=document.createElement('input');surI.value=profile.surname||'';surI.placeholder='اسم العائلة';surI.style.textTransform='uppercase';
+  const emShow=document.createElement('input');emShow.value=auth.email;emShow.disabled=true;emShow.className='ltr';
+  const phI=document.createElement('input');phI.value=(profile.phones||[]).join(' / ');phI.placeholder='أرقام الهاتف';
+  const oI=document.createElement('input');oI.type='number';oI.value=profile.openH||12;
+  const cI=document.createElement('input');cI.type='number';cI.value=profile.closeH||2;
+  const g=h('div','g');
+  [['الاسم',nameI],['اسم العائلة',surI],['📧 الإيميل (حسابك)',emShow,'full'],['الهاتف',phI,'full'],['يفتح قبل',oI],['يغلق قبل',cI]].forEach(([l,i,c])=>{const f=h('div','f'+(c==='full'?' full':''));f.append(h('label',null,l),i);g.appendChild(f)});
+  // قسم متقدم
+  const adv=h('div');adv.style.cssText='margin-top:16px;padding:12px;background:var(--field);border-radius:12px';
+  adv.innerHTML='<div style="font-weight:700;font-size:13px;color:var(--navy2);margin-bottom:8px">إعدادات متقدمة</div>';
+  const advBtns=h('div','acts');
+  const b1=h('button',null,'🧪 اختبار Push');b1.onclick=testPush;
+  const b2=h('button',null,'🧪 اختبار إيميل');b2.onclick=testEmail;
+  advBtns.append(b1,b2);
+  adv.appendChild(advBtns);
+  g.appendChild(adv);
+
+  const logoutBtn=h('button','auth-btn alt');logoutBtn.style.marginTop='16px';logoutBtn.textContent='🚪 تسجيل الخروج';
+  logoutBtn.onclick=()=>{closeSheet();doLogout()};
+  g.appendChild(logoutBtn);
+
+  sheet('بياناتي',[para('بياناتك تُستخدم لتعبئة الرحلات تلقائيًا.'),g],[
+    {label:'إلغاء'},
+    {label:'حفظ',cls:'pri',keep:true,fn:()=>{
+      profile.name=nameI.value.trim();profile.surname=surI.value.trim().toUpperCase();
+      profile.phones=phI.value.split(/[\/,\s]+/).filter(x=>x.replace(/\D/g,'').length>=7);
+      profile.openH=+oI.value||12;profile.closeH=+cI.value||2;
+      save();closeSheet();toast('تم الحفظ');
+    }}
+  ]);
+};
+$('bExp').onclick=()=>copySheet('نسخة احتياطية',JSON.stringify({trips,base,profile}),()=>LS.set('lastBackup',Date.now()));
+$('bImp').onclick=()=>{
+  const ta=document.createElement('textarea');ta.placeholder='ألصق النسخة الاحتياطية';ta.style.minHeight='140px';
+  sheet('استعادة نسخة احتياطية',[ta],[{label:'إلغاء'},{label:'فحص النسخة',cls:'pri',keep:true,fn:()=>{
+    let d;try{d=JSON.parse(ta.value)}catch(e){return toast('النسخة غير صالحة — تأكد أنك نسخت النص كاملًا')}
+    if(!d||!Array.isArray(d.trips))return toast('النسخة غير صالحة — لا توجد قائمة رحلات');
+    const ok=d.trips.filter(n=>n&&n.id&&n.date&&n.time&&n.flight&&n.booking&&!isNaN(+new Date(n.date+'T'+n.time+':00')));
+    const bad=d.trips.length-ok.length;
+    if(!ok.length)return toast('لا توجد رحلات صالحة في هذه النسخة');
+    const upd=ok.filter(n=>trips.some(x=>x.id===n.id)).length;
+    const lines=[para('رحلات جديدة: '+(ok.length-upd)+' — رحلات موجودة سيتم تحديثها: '+upd+'.')];
+    if(bad)lines.push(para('تم تجاهل '+bad+' رحلة غير مكتملة البيانات.'));
+    if(d.profile||d.base)lines.push(para('سيتم أيضًا تحديث بياناتك الشخصية والمطار الافتراضي من النسخة.'));
+    closeSheet();
+    sheet('تأكيد الاستعادة',lines,[{label:'إلغاء'},{label:'استعادة الآن',cls:'pri',fn:()=>{
+      ok.forEach(n=>{n.upd=n.upd||Date.now();trips=trips.filter(x=>x.id!==n.id);trips.push(n)});
+      if(/^[A-Z]{3}$/.test(d.base))base=d.base;
+      if(d.profile)profile=Object.assign(profile,d.profile);
+      save();render();toast('تمت الاستعادة ('+ok.length+' رحلة)');buzz([40,60,40]);
+    }}]);
+  }}]);
+};
+
+// ===== Init =====
+(async()=>{
+  // تسجيل SW
+  if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  
+  // التحقق من الجلسة
+  if(auth.token&&auth.email){
+    $('auth').classList.add('off');
+    render();tick();
+    setInterval(tick,30000);
+    cloudPull();
+    setInterval(()=>cloudPull(),5*60000);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)cloudPull()});
+    // تأكد أن push مسجّل
+    autoResubscribePush();
+  }else{
+    renderAuth();
+    $('auth').classList.remove('off');
+  }
+})();
+
+// فحص دوري لـ push banner
+setInterval(async()=>{if(auth.token)await renderBanner()},60000);
+</script>
+</body>
+</html>
